@@ -69,7 +69,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       return;
 
     html.classList.add(theme);
-  }, []);
+  }, [theme, toggleTheme]);
 
   return (
     <ThemeContext.Provider
