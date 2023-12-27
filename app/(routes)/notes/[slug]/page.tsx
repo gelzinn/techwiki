@@ -161,7 +161,7 @@ export default async function NotePage({
             className="mb-4 flex w-full flex-col items-start justify-start gap-4"
             aria-label="Content"
           >
-            <MDX children={content} />
+            <MDX>{content}</MDX>
           </section>
         </article>
       </section>
