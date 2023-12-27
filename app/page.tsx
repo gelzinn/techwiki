@@ -1,4 +1,6 @@
 import { ChevronRight } from 'lucide-react';
+import { CSSProperties } from 'react';
+import { TechWikiLogo } from './components/logo';
 
 export default function Homepage() {
   const cards = [
@@ -29,7 +31,12 @@ export default function Homepage() {
   ];
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-[1fr,3fr,1fr] w-full max-w-screen-desktop mx-auto h-auto">
+    <main
+      className="grid grid-cols-1 lg:grid-cols-[minmax(250px,_1fr),3fr,minmax(250px,_1fr)] w-full max-w-screen-full-hd mx-auto h-auto"
+      style={{
+        minHeight: 'calc(100vh - 65px)',
+      }}
+    >
       <aside className="hidden lg:flex flex-1 text-zinc-500 dark:text-zinc-400">
         <nav className="flex flex-col items-start justify-start p-8 gap-8">
           <ul className="flex flex-col items-start justify-start w-full gap-2">
@@ -69,29 +76,33 @@ export default function Homepage() {
         </nav>
       </aside>
 
-      <section className="flex flex-col items-center justify-start p-8 lg:border-r lg:border-l border-zinc-200 dark:border-zinc-900">
+      <section className="flex flex-col items-center justify-start px-4 py-8 sm:p-8 lg:border-r lg:border-l border-zinc-200 dark:border-zinc-900">
         <div className="flex flex-col items-center justify-start w-full gap-4 text-zinc-950 dark:text-zinc-50">
           <span
-            className="flex items-center justify-center gap-4 w-fit px-4 py-2 mb-4 text-sm text-center bg-rose-100 dark:bg-rose-950 dark:bg-opacity-50 border border-rose-500 dark:border-rose-800 rounded-md text-rose-800 dark:text-zinc-50"
+            className="flex items-center justify-center gap-4 w-fit px-4 py-2 text-sm text-center bg-emerald-100 dark:bg-emerald-950 dark:bg-opacity-50 border border-emerald-500 dark:border-emerald-800 rounded-md text-emerald-800 dark:text-zinc-50"
             role="alert"
           >
-            <span className="text-rose-500 pointer-events-none select-none">
+            <span className="text-emerald-500 pointer-events-none select-none">
               ✦
             </span>
             <p>
               <strong className="font-medium">Announcement:</strong> TechWiki is
               now open source!
             </p>
-            <span className="text-rose-500 pointer-events-none select-none">
+            <span className="text-emerald-500 pointer-events-none select-none">
               ✦
             </span>
           </span>
 
-          <div className="flex flex-1 flex-col items-center justify-center gap-1">
-            <h1 className="text-5xl">
-              <span className="font-medium">Tech</span>
-              <span className="font-light">Wiki</span>
-            </h1>
+          <div
+            className="flex flex-col items-center justify-center gap-1 my-8"
+            style={
+              {
+                textWrap: 'wrap',
+              } as CSSProperties
+            }
+          >
+            <TechWikiLogo className="text-5xl" />
 
             <span className="text-center text-zinc-500 dark:text-zinc-400">
               The open source encyclopedia for all tech-related topics.
@@ -107,7 +118,7 @@ export default function Homepage() {
                   <a
                     key={index}
                     href={href}
-                    className="group flex items-center justify-between w-full gap-2 p-4 text-sm text-white bg-zinc-200 dark:bg-zinc-950 rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-900 border border-zinc-300 dark:border-zinc-900"
+                    className="group flex items-center justify-between w-full gap-2 p-4 text-sm text-white bg-zinc-100 dark:bg-zinc-950 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-900"
                   >
                     <div
                       className="flex flex-col items-start justify-start"
@@ -131,7 +142,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <aside className="hidden lg:flex flex-1 text-zinc-500 dark:text-zinc-400" />
+      <aside className="absolute md:relative flex flex-1 text-zinc-500 dark:text-zinc-400" />
     </main>
   );
 }
