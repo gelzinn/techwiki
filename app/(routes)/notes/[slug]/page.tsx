@@ -78,7 +78,7 @@ export default async function NotePage({
           </section>
 
           <section
-            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2 pb-4 border-b border-zinc-200 dark:border-zinc-900"
+            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2 border-b border-zinc-200 pb-4 dark:border-zinc-900"
             aria-label="Authors"
           >
             {authors &&
