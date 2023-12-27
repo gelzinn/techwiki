@@ -3,8 +3,22 @@ import { Ubuntu } from 'next/font/google';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { Header } from './components/header';
 
+import { seo } from './config/seo';
+
 import '../styles/globals.css';
-import Script from 'next/script';
+
+export const metadata = {
+  title: {
+    default: `${seo.title.default} ${seo.title.separator} ${seo.description}`,
+    template: seo.title.template,
+  },
+  description: seo.description,
+  keywords: seo.keywords,
+  authors: seo.authors,
+  creator: seo.creator,
+  url: seo.url,
+  openGraph: seo.openGraph,
+};
 
 const font = Ubuntu({
   subsets: ['latin'],
@@ -17,7 +31,7 @@ export default function RootLayout({ children }: any) {
     <html lang="en" className={font.className}>
       <head>
         <title>
-          TechWiki - A free and open-source knowledge base for developers
+          {seo.title.default} {seo.title.separator} {seo.description}
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
