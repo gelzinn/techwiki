@@ -32,13 +32,13 @@ export default function Homepage() {
 
   return (
     <main
-      className="mx-auto grid h-auto w-full max-w-screen-full-hd grid-cols-1 lg:grid-cols-[minmax(250px,_1fr),3fr,minmax(250px,_1fr)]"
+      className="mx-auto grid h-auto w-full max-w-screen-full-hd grid-cols-1 lg:grid-cols-[minmax(250px,_1fr),4fr,minmax(250px,_1fr)]"
       style={{
         minHeight: 'calc(100vh - 65px)',
       }}
     >
-      <aside className="hidden flex-1 text-zinc-500 lg:flex dark:text-zinc-400">
-        <nav className="flex flex-col items-start justify-start gap-8 p-8">
+      <aside className="hidden text-zinc-500 lg:flex dark:text-zinc-400">
+        <nav className="flex flex-col items-start justify-start gap-8 p-6">
           <ul className="flex w-full flex-col items-start justify-start gap-2">
             <span className="w-full text-sm font-bold uppercase">
               Getting Started
@@ -142,7 +142,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <aside className="absolute flex flex-1 text-zinc-500 md:relative dark:text-zinc-400" />
+      <aside className="absolute flex text-zinc-500 md:relative dark:text-zinc-400" />
     </main>
   );
 }

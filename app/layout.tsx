@@ -32,7 +32,7 @@ export default function RootLayout({ children }: any) {
   return (
     <ThemeProvider>
       <html lang="en" className={`${font.className} ${theme.defaultTheme}`}>
-        <Head>
+        <head>
           <title>
             {seo.title.default} {seo.title.separator} {seo.description}
           </title>
@@ -44,7 +44,7 @@ export default function RootLayout({ children }: any) {
           />
 
           <link rel="icon" href="/favicon.ico" />
-        </Head>
+        </head>
 
         <body className="relative h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
           <Header />
