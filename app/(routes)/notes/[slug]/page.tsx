@@ -1,20 +1,14 @@
-import { ChevronLeft } from 'lucide-react';
-import { getNote } from '../../../lib/mdx';
 import Link from 'next/link';
+
+import { getNote } from '../../../lib/mdx';
+
+import { ChevronLeft } from 'lucide-react';
+import MDX from 'app/components/mdx';
 
 const getNoteContent = async (slug: string) => {
   const { meta, content } = await getNote(slug);
   return { meta, content };
 };
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { meta } = await getNoteContent(params.slug);
-  return { meta };
-}
 
 export default async function NotePage({
   params,
@@ -22,7 +16,6 @@ export default async function NotePage({
   params: { slug: string };
 }) {
   const { meta, content }: any = await getNoteContent(params.slug);
-
   const { authors, categories, description, thumbnail, title } = meta;
 
   return (
@@ -42,10 +35,7 @@ export default async function NotePage({
         className="mx-auto flex w-full max-w-3xl flex-col items-start justify-start gap-4"
         aria-label="Note"
       >
-        <picture
-          className="mx-auto mb-4 aspect-video select-none overflow-hidden rounded-md"
-          aria-label="Thumbnail"
-        >
+        <picture className="mx-auto mb-4 aspect-video select-none overflow-hidden rounded-md">
           <source srcSet={thumbnail} />
           <source srcSet={thumbnail} />
           <img
@@ -82,13 +72,13 @@ export default async function NotePage({
               {title}
             </h2>
 
-            <p className="text-left text-lg text-zinc-500 sm:text-xl dark:text-zinc-400">
+            <p className="text-left text-zinc-500 dark:text-zinc-400">
               {description}
             </p>
           </section>
 
           <section
-            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2"
+            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2 pb-4 border-b border-zinc-200 dark:border-zinc-900"
             aria-label="Authors"
           >
             {authors &&
@@ -167,8 +157,11 @@ export default async function NotePage({
               })}
           </section>
 
-          <section className="mb-4 flex w-full flex-col items-start justify-start gap-4">
-            {content}
+          <section
+            className="mb-4 flex w-full flex-col items-start justify-start gap-4"
+            aria-label="Content"
+          >
+            <MDX children={content} />
           </section>
         </article>
       </section>
