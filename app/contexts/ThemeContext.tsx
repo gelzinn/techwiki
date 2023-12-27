@@ -78,7 +78,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       return;
 
     html.classList.add(theme);
-  }, [theme]);
+  });
 
   return (
     <ThemeContext.Provider
