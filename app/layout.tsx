@@ -1,4 +1,5 @@
 import { Ubuntu } from 'next/font/google';
+import Head from 'next/head';
 
 import { ThemeProvider } from './contexts/ThemeContext';
 import { Header } from './components/header';
@@ -6,6 +7,7 @@ import { Header } from './components/header';
 import { seo } from './config/seo';
 
 import '../styles/globals.css';
+import { theme } from './config/theme';
 
 export const metadata = {
   title: {
@@ -28,25 +30,28 @@ const font = Ubuntu({
 
 export default function RootLayout({ children }: any) {
   return (
-    <html lang="en" className={font.className}>
-      <head>
-        <title>
-          {seo.title.default} {seo.title.separator} {seo.description}
-        </title>
+    <ThemeProvider>
+      <html lang="en" className={`${font.className} ${theme.defaultTheme}`}>
+        <Head>
+          <title>
+            {seo.title.default} {seo.title.separator} {seo.description}
+          </title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="google-adsense-account" content="ca-pub-8214931196684102" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta
+            name="google-adsense-account"
+            content="ca-pub-8214931196684102"
+          />
 
-        <link rel="icon" href="/favicon.ico" />
-      </head>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <ThemeProvider>
         <body className="relative h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
           <Header />
 
           {children}
         </body>
-      </ThemeProvider>
-    </html>
+      </html>
+    </ThemeProvider>
   );
 }
