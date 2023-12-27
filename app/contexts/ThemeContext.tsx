@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, ReactNode, useLayoutEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { theme as themeConfig } from '../config/theme';
 
 const defaultTheme = themeConfig.defaultTheme as ThemeType;
@@ -26,22 +32,25 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     defaultTheme === 'dark' ? 'light' : 'dark',
   );
 
-  const toggleTheme = (t?: ThemeType) => {
-    if (typeof window === 'undefined') return defaultTheme;
+  const toggleTheme = useCallback(
+    (t?: ThemeType) => {
+      if (typeof window === 'undefined') return defaultTheme;
 
-    const html = document.documentElement;
+      const html = document.documentElement;
 
-    const newTheme: ThemeType = t || (theme === 'dark' ? 'light' : 'dark');
-    const oldTheme: ThemeType = t ? (t === 'dark' ? 'light' : 'dark') : theme;
+      const newTheme: ThemeType = t || (theme === 'dark' ? 'light' : 'dark');
+      const oldTheme: ThemeType = t ? (t === 'dark' ? 'light' : 'dark') : theme;
 
-    setTheme(newTheme);
-    setOppositeTheme(oldTheme);
+      setTheme(newTheme);
+      setOppositeTheme(oldTheme);
 
-    localStorage.setItem('theme', newTheme);
-    html.classList.replace(oldTheme, newTheme);
+      localStorage.setItem('theme', newTheme);
+      html.classList.replace(oldTheme, newTheme);
 
-    return newTheme;
-  };
+      return newTheme;
+    },
+    [theme],
+  );
 
   useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
@@ -69,7 +78,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       return;
 
     html.classList.add(theme);
-  }, [theme, toggleTheme]);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider
