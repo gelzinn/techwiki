@@ -26,7 +26,7 @@ export default function RootLayout({ children }: any) {
       </head>
 
       <ThemeProvider>
-        <body className="relative w-full h-screen bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+        <body className="relative h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
           <Header />
 
           {children}
