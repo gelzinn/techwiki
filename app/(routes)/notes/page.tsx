@@ -1,5 +1,6 @@
 import { getNotes } from 'app/lib/mdx';
 import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function Notes() {
   const posts = await getNotes();
@@ -7,13 +8,13 @@ export default async function Notes() {
   return (
     <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8">
       <h1 className="mb-8 flex w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900">
-        <a
+        <Link
           href="/"
           className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
         >
           <span className="sr-only">Home</span>
           <ChevronLeft className="h-4 w-4" />
-        </a>
+        </Link>
         <span className="text-3xl">All notes</span>
       </h1>
 
@@ -28,15 +29,20 @@ export default async function Notes() {
                 key={index}
                 className="flex w-full flex-col items-start justify-start"
               >
-                <picture className="pointer-events-none mb-4 aspect-video w-full select-none overflow-hidden rounded-md">
-                  <source srcSet={thumbnail} />
-                  <source srcSet={thumbnail} />
-                  <img
-                    src={thumbnail}
-                    alt={title}
-                    className="pointer-events-none aspect-video select-none"
-                  />
-                </picture>
+                <Link
+                  href={`/notes/${slug}`}
+                  className="flex items-center justify-start gap-4 font-medium dark:border-zinc-900"
+                >
+                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md">
+                    <source srcSet={thumbnail} />
+                    <source srcSet={thumbnail} />
+                    <img
+                      src={thumbnail}
+                      alt={title}
+                      className="pointer-events-none aspect-video select-none"
+                    />
+                  </picture>
+                </Link>
 
                 <section
                   className="mb-4 flex w-full flex-wrap items-center justify-start gap-2"
@@ -45,12 +51,13 @@ export default async function Notes() {
                   {categories &&
                     categories.map((category: any, index: number) => {
                       return (
-                        <span
+                        <Link
                           key={index}
+                          href={`/notes?category=${category}`}
                           className="inline-block rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400"
                         >
                           {category}
-                        </span>
+                        </Link>
                       );
                     })}
                 </section>
@@ -85,7 +92,7 @@ export default async function Notes() {
                             <a
                               key={index}
                               className="flex items-center justify-start gap-1"
-                              href={`notes?author=${author}`}
+                              href={`/notes?author=${author}`}
                             >
                               <img
                                 key={index}
@@ -103,7 +110,7 @@ export default async function Notes() {
                               <a
                                 key={index}
                                 className="flex items-center justify-start gap-1"
-                                href={`notes?author=${author}`}
+                                href={`/notes?author=${author}`}
                               >
                                 <img
                                   key={index}
@@ -125,7 +132,7 @@ export default async function Notes() {
                               <a
                                 key={index}
                                 className="flex items-center justify-start gap-1"
-                                href={`notes?author=${author}`}
+                                href={`/notes?author=${author}`}
                               >
                                 <img
                                   key={index}
@@ -154,12 +161,12 @@ export default async function Notes() {
                     })}
                 </section>
 
-                <a
+                <Link
                   href={`/notes/${slug}`}
                   className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
                 >
                   Read more →
-                </a>
+                </Link>
               </li>
             );
           })
