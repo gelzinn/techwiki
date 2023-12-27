@@ -32,10 +32,9 @@ export default function RootLayout({ children }: any) {
           {children}
 
           <Script
+            async
             id="adsense"
             data-ad-client="ca-pub-8214931196684102"
-            async
-            strategy="beforeInteractive"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           />
         </body>
