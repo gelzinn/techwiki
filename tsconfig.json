@@ -22,22 +22,14 @@
     "paths": {
       "@": [
         "./"
-      ],
-      "@/ui/*": [
-        "ui/*"
-      ],
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
       ]
     },
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true,
   },
   "include": [
     "next-env.d.ts",
