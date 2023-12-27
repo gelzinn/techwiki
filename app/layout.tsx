@@ -21,6 +21,7 @@ export default function RootLayout({ children }: any) {
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-adsense-account" content="ca-pub-8214931196684102" />
 
         <link rel="icon" href="/favicon.ico" />
       </head>
@@ -30,13 +31,6 @@ export default function RootLayout({ children }: any) {
           <Header />
 
           {children}
-
-          <Script
-            async
-            id="adsense"
-            data-ad-client="ca-pub-8214931196684102"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          />
         </body>
       </ThemeProvider>
     </html>
