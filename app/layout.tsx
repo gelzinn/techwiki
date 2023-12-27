@@ -33,10 +33,6 @@ export default function RootLayout({ children }: any) {
     <ThemeProvider>
       <html lang="en" className={`${font.className} ${theme.defaultTheme}`}>
         <head>
-          <title>
-            {seo.title.default} {seo.title.separator} {seo.description}
-          </title>
-
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta
             name="google-adsense-account"

@@ -5,37 +5,37 @@
 
 /* Headers */
 .mdx-content h1 {
-  font-size: 2em;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 .mdx-content h2 {
-  font-size: 1.8em;
+  font-size: 1.65rem;
   font-weight: bold;
   margin-bottom: 0.8rem;
 }
 
 .mdx-content h3 {
-  font-size: 1.6em;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.6rem;
 }
 
 .mdx-content h4 {
-  font-size: 1.4em;
+  font-size: 1.35rem;
   font-weight: bold;
   margin-bottom: 0.4rem;
 }
 
 .mdx-content h5 {
-  font-size: 1.2em;
+  font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
 
 .mdx-content h6 {
-  font-size: 1em;
+  font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 0.1px;
 }
@@ -44,11 +44,11 @@
 
 .mdx-content p {
   margin-bottom: 1rem;
-  color: rgb(161 161 170 / 1);
+  color: rgb(113 113 122 / 1);
 }
 
 :where(.dark) .mdx-content p {
-  color: rgb(113 113 122 / 1);
+  color: rgb(161 161 170 / 1);
 }
 
 .mdx-content strong {
@@ -75,6 +75,14 @@
 
 .mdx-content li {
   margin-bottom: 0.5rem;
+  list-style-type: disc;
+  list-style-position: inside;
+
+  color: rgb(113 113 122 / 1);
+}
+
+:where(.dark) .mdx-content li {
+  color: rgb(161 161 170 / 1);
 }
 
 /* Links */
@@ -176,6 +184,11 @@
 .mdx-content img {
   max-width: 100%;
   margin-bottom: 1rem;
+
+  pointer-events: none;
+  user-select: none;
+
+  border-radius: 0.25rem;
 }
 
 /* Horizontal Rule */

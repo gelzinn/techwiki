@@ -35,15 +35,17 @@ export default async function NotePage({
         className="mx-auto flex w-full max-w-3xl flex-col items-start justify-start gap-4"
         aria-label="Note"
       >
-        <picture className="mx-auto mb-4 aspect-video select-none overflow-hidden rounded-md">
-          <source srcSet={thumbnail} />
-          <source srcSet={thumbnail} />
-          <img
-            src={thumbnail}
-            alt={title}
-            className="pointer-events-none aspect-video w-full max-w-3xl select-none"
-          />
-        </picture>
+        {thumbnail && (
+          <picture className="mx-auto mb-4 aspect-video select-none overflow-hidden rounded-md">
+            <source srcSet={thumbnail} />
+            <source srcSet={thumbnail} />
+            <img
+              src={thumbnail}
+              alt={title}
+              className="pointer-events-none aspect-video w-full max-w-3xl select-none"
+            />
+          </picture>
+        )}
 
         <article className="flex w-full flex-col items-start justify-start gap-4">
           <section
