@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useTheme } from 'app/hooks/useTheme';
 
 import { Menu, Moon, PanelRightClose, Sun } from 'lucide-react';
@@ -12,7 +11,7 @@ export const Header = () => {
   const handleToggleTheme = () => toggleTheme();
 
   return (
-    <header className="sticky top-0 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50">
+    <header className="sticky top-0 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50 z-50">
       <nav className="relative flex h-16 w-full max-w-screen-full-hd flex-row-reverse items-center justify-between p-4 lg:flex-row">
         <button
           type="button"
