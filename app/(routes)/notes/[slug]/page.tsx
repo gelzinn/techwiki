@@ -27,10 +27,10 @@ export default async function NotePage({
 
   return (
     <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8 text-justify">
-      <h1 className="relative mb-8 flex w-full items-center justify-start lg:justify-center gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900">
+      <h1 className="relative mb-8 flex w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium lg:justify-center dark:border-zinc-900">
         <Link
           href="/notes"
-          className="lg:absolute lg:left-0 flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+          className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 lg:absolute lg:left-0 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
         >
           <span className="sr-only">Notes</span>
           <ChevronLeft className="h-4 w-4" />
@@ -39,11 +39,11 @@ export default async function NotePage({
       </h1>
 
       <section
-        className="flex w-full max-w-3xl flex-col items-start justify-start gap-4 mx-auto"
+        className="mx-auto flex w-full max-w-3xl flex-col items-start justify-start gap-4"
         aria-label="Note"
       >
         <picture
-          className="mb-4 aspect-video select-none overflow-hidden rounded-md mx-auto"
+          className="mx-auto mb-4 aspect-video select-none overflow-hidden rounded-md"
           aria-label="Thumbnail"
         >
           <source srcSet={thumbnail} />
@@ -51,7 +51,7 @@ export default async function NotePage({
           <img
             src={thumbnail}
             alt={title}
-            className="w-full max-w-3xl pointer-events-none aspect-video select-none"
+            className="pointer-events-none aspect-video w-full max-w-3xl select-none"
           />
         </picture>
 
@@ -78,11 +78,11 @@ export default async function NotePage({
             className="mb-4 flex w-full flex-col items-start justify-start gap-1"
             aria-label="Title and description"
           >
-            <h2 className="text-left text-2xl sm:text-4xl font-bold leading-tight tracking-tight">
+            <h2 className="text-left text-2xl font-bold leading-tight tracking-tight sm:text-4xl">
               {title}
             </h2>
 
-            <p className="text-left text-lg sm:text-xl text-zinc-500 dark:text-zinc-400">
+            <p className="text-left text-lg text-zinc-500 sm:text-xl dark:text-zinc-400">
               {description}
             </p>
           </section>
