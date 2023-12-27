@@ -79,7 +79,7 @@ export default function Homepage() {
       <section className="flex flex-col items-center justify-start border-zinc-200 px-4 py-8 sm:p-8 lg:border-x dark:border-zinc-900">
         <div className="flex w-full flex-col items-center justify-start gap-4 text-zinc-950 dark:text-zinc-50">
           <span
-            className="flex w-fit items-center justify-center gap-4 rounded-md border border-emerald-500 bg-emerald-100 px-4 py-2 text-center text-sm text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950 dark:bg-opacity-50 dark:text-zinc-50"
+            className="flex w-fit items-center justify-center gap-4 rounded-md border border-emerald-500 bg-emerald-100 px-4 py-2 text-center text-sm text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/25 dark:text-zinc-50"
             role="alert"
           >
             <span className="pointer-events-none select-none text-emerald-500">
