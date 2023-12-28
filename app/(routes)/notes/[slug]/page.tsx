@@ -96,7 +96,7 @@ export default async function NotePage({
               authors.map((author: string, index: number) => (
                 <Link
                   key={index}
-                  className={`flex items-center justify-start gap-${
+                  className={`gap- flex items-center justify-start${
                     index === authors.length - 1 ? '2' : '1'
                   }`}
                   href={`/notes?author=${author}`}

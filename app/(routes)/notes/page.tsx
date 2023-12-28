@@ -36,7 +36,7 @@ export default async function Notes() {
                   href={`/notes/${slug}`}
                   className="flex items-center justify-start gap-4 font-medium dark:border-zinc-900"
                 >
-                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900">
+                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
                     {thumbnail ? (
                       <img
                         src={thumbnail}
@@ -50,7 +50,7 @@ export default async function Notes() {
                 </Link>
 
                 <section
-                  className="mb-4 w-full flex items-center justify-start gap-1.5 overflow-x-auto scrollbar-none"
+                  className="scrollbar-none mb-4 flex w-full items-center justify-start gap-1.5 overflow-x-auto"
                   aria-label="Categories"
                 >
                   {categories && categories.length > 0 && (
@@ -59,7 +59,7 @@ export default async function Notes() {
                         <Link
                           key={index}
                           href={`/notes?category=${category}`}
-                          className="w-fit rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400 text-nowrap"
+                          className="w-fit text-nowrap rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400"
                         >
                           {category}
                         </Link>
@@ -95,21 +95,21 @@ export default async function Notes() {
                           <img
                             src={`https://github.com/${author}.png`}
                             alt={author}
-                            className="pointer-events-none h-6 w-6 select-none rounded-full mr-1"
+                            className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full"
                           />
 
                           <span className="text-sm">{author}</span>
                         </Link>
 
                         {index === authors.length - 2 && (
-                          <span className="text-sm text-zinc-400 pointer-events-none">
+                          <span className="pointer-events-none text-sm text-zinc-400">
                             {' '}
                             and
                           </span>
                         )}
 
                         {index < authors.length - 2 && (
-                          <span className="text-sm text-zinc-400 pointer-events-none">
+                          <span className="pointer-events-none text-sm text-zinc-400">
                             ,
                           </span>
                         )}
