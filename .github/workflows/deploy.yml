@@ -29,8 +29,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Lint for valid syntax
-        run: pnpm run lint
+      - name: Check for linting errors
+        id: lint
+        run: |
+          if pnpm run lint; then
+            echo "✔ No ESLint warnings or errors found"
+            echo "::set-output name=lint-passed::true"
+          else
+            echo "✖ ESLint found some errors"
+            echo "::set-output name=lint-passed::false"
+            exit 1
+          fi
 
       - name: Build the project
         run: pnpm run build
+        if: steps.lint.outputs.lint-passed == 'true'
