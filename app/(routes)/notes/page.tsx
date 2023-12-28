@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { Fragment } from 'react';
+
 import { getNotes } from 'app/lib/mdx';
 import { ChevronLeft } from 'lucide-react';
 
@@ -19,7 +21,7 @@ export default async function Notes() {
         <span className="text-3xl">All notes</span>
       </h1>
 
-      <ul className="grid w-full grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <ul className="grid w-full grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {posts && posts.length > 0 ? (
           posts.map((post: any, index: number) => {
             const { slug, title, description, thumbnail, categories, authors } =
@@ -34,7 +36,7 @@ export default async function Notes() {
                   href={`/notes/${slug}`}
                   className="flex items-center justify-start gap-4 font-medium dark:border-zinc-900"
                 >
-                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-900">
+                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900">
                     {thumbnail ? (
                       <img
                         src={thumbnail}
@@ -48,25 +50,26 @@ export default async function Notes() {
                 </Link>
 
                 <section
-                  className="mb-4 flex w-full flex-wrap items-center justify-start gap-2"
+                  className="mb-4 w-full flex items-center justify-start gap-1.5 overflow-x-auto scrollbar-none"
                   aria-label="Categories"
                 >
-                  {categories &&
-                    categories.map((category: any, index: number) => {
-                      return (
+                  {categories && categories.length > 0 && (
+                    <div className="relative flex items-center justify-start gap-1.5">
+                      {categories.map((category: any, index: number) => (
                         <Link
                           key={index}
                           href={`/notes?category=${category}`}
-                          className="inline-block rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400"
+                          className="w-fit rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400 text-nowrap"
                         >
                           {category}
                         </Link>
-                      );
-                    })}
+                      ))}
+                    </div>
+                  )}
                 </section>
 
                 <section
-                  className="mb-4 flex w-full flex-1 flex-col items-start justify-start gap-1"
+                  className="flex w-full flex-1 flex-col items-start justify-start gap-1"
                   aria-label="Title and description"
                 >
                   <strong className="w-full font-medium tracking-tight">
@@ -79,89 +82,47 @@ export default async function Notes() {
                 </section>
 
                 <section
-                  className="mb-4 flex w-full flex-wrap items-center justify-start gap-2"
+                  className="my-4 flex w-full flex-wrap items-center justify-start gap-1.5"
                   aria-label="Authors"
                 >
-                  {authors &&
-                    authors.map((author: any, index: number) => {
-                      const quantity = authors.length;
+                  {authors && authors.length > 0 ? (
+                    authors.map((author: string, index: number) => (
+                      <Fragment key={index}>
+                        <Link
+                          className="flex items-center justify-start"
+                          href={`/notes?author=${author}`}
+                        >
+                          <img
+                            src={`https://github.com/${author}.png`}
+                            alt={author}
+                            className="pointer-events-none h-6 w-6 select-none rounded-full mr-1"
+                          />
 
-                      const isLast = index === quantity - 1;
-                      const isPenultimate = index === quantity - 2;
+                          <span className="text-sm">{author}</span>
+                        </Link>
 
-                      switch (quantity) {
-                        case 1:
-                          return (
-                            <a
-                              key={index}
-                              className="flex items-center justify-start gap-1"
-                              href={`/notes?author=${author}`}
-                            >
-                              <img
-                                key={index}
-                                src={`https://github.com/${author}.png`}
-                                alt={author}
-                                className="pointer-events-none h-6 w-6 select-none rounded-full"
-                              />
+                        {index === authors.length - 2 && (
+                          <span className="text-sm text-zinc-400 pointer-events-none">
+                            {' '}
+                            and
+                          </span>
+                        )}
 
-                              <span className="text-sm">{author}</span>
-                            </a>
-                          );
-                        case 2:
-                          return (
-                            <>
-                              <a
-                                key={index}
-                                className="flex items-center justify-start gap-1"
-                                href={`/notes?author=${author}`}
-                              >
-                                <img
-                                  key={index}
-                                  src={`https://github.com/${author}.png`}
-                                  alt={author}
-                                  className="pointer-events-none h-6 w-6 select-none rounded-full"
-                                />
-
-                                <span className="text-sm">{author}</span>
-                              </a>
-
-                              {!isLast && <span className="text-sm">and</span>}
-                            </>
-                          );
-                        default:
-                        case 3:
-                          return (
-                            <>
-                              <a
-                                key={index}
-                                className="flex items-center justify-start gap-1"
-                                href={`/notes?author=${author}`}
-                              >
-                                <img
-                                  key={index}
-                                  src={`https://github.com/${author}.png`}
-                                  alt={author}
-                                  className="pointer-events-none h-6 w-6 select-none rounded-full"
-                                />
-
-                                <span className="text-sm">{author}</span>
-                              </a>
-
-                              {!isLast && (
-                                <span className="-ml-2 text-sm">,</span>
-                              )}
-
-                              {isPenultimate && (
-                                <span className="text-sm">and</span>
-                              )}
-
-                              {isLast && (
-                                <span className="-ml-2 text-sm">.</span>
-                              )}
-                            </>
-                          );
-                      }
-                    })}
+                        {index < authors.length - 2 && (
+                          <span className="text-sm text-zinc-400 pointer-events-none">
+                            ,
+                          </span>
+                        )}
+                      </Fragment>
+                    ))
+                  ) : (
+                    <span
+                      className="text-sm text-zinc-500 dark:text-zinc-400"
+                      aria-label="Anonymous"
+                    >
+                      Anonymous author.
+                    </span>
+                  )}
                 </section>
 
                 <Link
