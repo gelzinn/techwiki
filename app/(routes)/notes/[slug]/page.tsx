@@ -20,7 +20,7 @@ export default async function NotePage({
 
   return (
     <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8">
-      <section
+      <header
         className="mx-auto mb-8 flex h-16 w-full max-w-3xl items-center justify-start gap-4 border-b border-zinc-200 pb-4 text-sm dark:border-zinc-900"
         aria-label="Breadcrumb"
       >
@@ -53,7 +53,7 @@ export default async function NotePage({
         >
           {title}
         </span>
-      </section>
+      </header>
 
       <section
         className="mx-auto flex w-full max-w-3xl flex-col items-start justify-start"
@@ -71,7 +71,10 @@ export default async function NotePage({
           </picture>
         )}
 
-        <article className="flex w-full flex-col items-start justify-start gap-4">
+        <section
+          className="mb-4 flex w-full flex-wrap items-center justify-start gap-2 border-b border-zinc-200 pb-4 dark:border-zinc-900"
+          aria-label="Informations"
+        >
           <section
             className="mb-4 flex w-full flex-col items-start justify-start gap-1"
             aria-label="Title and description"
@@ -86,85 +89,44 @@ export default async function NotePage({
           </section>
 
           <section
-            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2 border-b border-zinc-200 pb-4 dark:border-zinc-900"
+            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2"
             aria-label="Authors"
           >
-            {authors &&
-              authors.map((author: any, index: number) => {
-                const quantity = authors.length;
+            {authors && authors.length > 0 ? (
+              authors.map((author: string, index: number) => (
+                <Link
+                  key={index}
+                  className={`flex items-center justify-start gap-${
+                    index === authors.length - 1 ? '2' : '1'
+                  }`}
+                  href={`/notes?author=${author}`}
+                >
+                  <img
+                    src={`https://github.com/${author}.png`}
+                    alt={author}
+                    className="pointer-events-none h-6 w-6 select-none rounded-full"
+                  />
 
-                const isLast = index === quantity - 1;
-                const isPenultimate = index === quantity - 2;
-
-                switch (quantity) {
-                  case 1:
-                    return (
-                      <Link
-                        key={index}
-                        className="flex items-center justify-start gap-2"
-                        href={`/notes?author=${author}`}
-                      >
-                        <img
-                          key={index}
-                          src={`https://github.com/${author}.png`}
-                          alt={author}
-                          className="pointer-events-none h-8 w-8 select-none rounded-full"
-                        />
-
-                        <span className="text-sm">{author}</span>
-                      </Link>
-                    );
-                  case 2:
-                    return (
-                      <>
-                        <Link
-                          key={index}
-                          className="flex items-center justify-start gap-1"
-                          href={`notes?author=${author}`}
-                        >
-                          <img
-                            key={index}
-                            src={`https://github.com/${author}.png`}
-                            alt={author}
-                            className="pointer-events-none h-6 w-6 select-none rounded-full"
-                          />
-
-                          <span className="text-sm">{author}</span>
-                        </Link>
-
-                        {!isLast && <span className="text-sm">and</span>}
-                      </>
-                    );
-                  default:
-                  case 3:
-                    return (
-                      <>
-                        <Link
-                          key={index}
-                          className="flex items-center justify-start gap-1"
-                          href={`notes?author=${author}`}
-                        >
-                          <img
-                            key={index}
-                            src={`https://github.com/${author}.png`}
-                            alt={author}
-                            className="pointer-events-none h-6 w-6 select-none rounded-full"
-                          />
-
-                          <span className="text-sm">{author}</span>
-                        </Link>
-
-                        {!isLast && <span className="-ml-2 text-sm">,</span>}
-
-                        {isPenultimate && <span className="text-sm">and</span>}
-
-                        {isLast && <span className="-ml-2 text-sm">.</span>}
-                      </>
-                    );
-                }
-              })}
+                  <span className="text-sm">
+                    {author}
+                    {index === authors.length - 1 && '.'}
+                    {index === authors.length - 2 && ' and'}
+                    {index < authors.length - 2 && ','}
+                  </span>
+                </Link>
+              ))
+            ) : (
+              <span
+                className="text-sm text-zinc-500 dark:text-zinc-400"
+                aria-label="Anonymous"
+              >
+                Anonymous author.
+              </span>
+            )}
           </section>
+        </section>
 
+        <article className="flex w-full flex-col items-start justify-start gap-4">
           <section
             className="mb-4 flex w-full flex-col items-start justify-start gap-4 border-b border-zinc-200 pb-4 dark:border-zinc-900"
             aria-label="Content"
