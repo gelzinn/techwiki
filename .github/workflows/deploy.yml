@@ -35,7 +35,7 @@ jobs:
       - name: Check for linting errors
         id: set-output
         run: |
-          output=$(npm run lint) || true
+          output=$(pnpm run lint)
           echo "$output"
           if [[ "$output" == *"error"* ]]; then
             echo "LINT_PASSED=false" >> $GITHUB_ENV
