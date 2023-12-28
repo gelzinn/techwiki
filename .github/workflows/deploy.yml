@@ -33,10 +33,8 @@ jobs:
         id: lint
         run: |
           if pnpm run lint; then
-            echo "✔ No ESLint warnings or errors found"
             echo "::set-output name=lint-passed::true"
           else
-            echo "✖ ESLint found some errors"
             echo "::set-output name=lint-passed::false"
             exit 1
           fi
