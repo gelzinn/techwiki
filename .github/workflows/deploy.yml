@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  install:
-    name: Deploy the project
+  test:
+    name: Test and lint the project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
