@@ -85,6 +85,42 @@
   color: rgb(161 161 170 / 1);
 }
 
+.mdx-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.mdx-content ol li {
+  margin-bottom: 1rem;
+
+  list-style-type: decimal;
+  list-style-position: outside;
+  color: rgb(113 113 122 / 1);
+}
+
+.mdx-content ol ol {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.mdx-content ol ul {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.mdx-content ol ul li {
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+
+  list-style-type: disc;
+  list-style-position: outside;
+  color: rgb(113 113 122 / 1);
+}
+
+:where(.dark) .mdx-content ol li {
+  color: rgb(161 161 170 / 1);
+}
+
 /* Links */
 
 .mdx-content a {
