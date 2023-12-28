@@ -1,4 +1,4 @@
-name: Release new version
+name: Test and deploy
 
 on:
   push:
@@ -6,12 +6,11 @@ on:
       - main
 
 jobs:
-  release:
-    if: ${{ github.repository_owner == 'gelzinn' }}
-    name: Release new version of the project
+  install:
+    name: Deploy the project
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -28,7 +27,7 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      - name: Install NPM Dependencies
+      - name: Install dependencies
         run: pnpm install
 
       - name: Lint for valid syntax
