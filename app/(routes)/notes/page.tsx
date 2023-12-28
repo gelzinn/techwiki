@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { Fragment } from 'react';
 
@@ -38,10 +39,16 @@ export default async function Notes() {
                 >
                   <picture className="pointer-events-none aspect-video h-full w-full overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
                     {thumbnail ? (
-                      <img
+                      <Image
                         src={thumbnail}
                         alt={title}
                         className="pointer-events-none aspect-video w-full select-none rounded-md bg-zinc-100 object-cover dark:bg-zinc-900"
+                        objectFit="cover"
+                        width={640}
+                        height={360}
+                        quality={50}
+                        priority
+                        loading="eager"
                       />
                     ) : (
                       <div className="pointer-events-none aspect-video select-none rounded-md bg-zinc-100 dark:bg-zinc-900" />

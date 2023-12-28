@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { getNote } from '../../../lib/mdx';
 
@@ -62,10 +63,16 @@ export default async function NotePage({
       >
         {thumbnail && (
           <picture className="mx-auto mb-8 aspect-video w-full select-none overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
-            <img
+            <Image
               src={thumbnail}
               alt={title}
               className="pointer-events-none aspect-video w-full max-w-3xl select-none"
+              objectFit="cover"
+              width={640}
+              height={360}
+              quality={100}
+              priority
+              loading="eager"
             />
           </picture>
         )}
@@ -98,10 +105,13 @@ export default async function NotePage({
                     className="flex items-center justify-start"
                     href={`/notes?author=${author}`}
                   >
-                    <img
+                    <Image
                       src={`https://github.com/${author}.png`}
                       alt={author}
                       className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full"
+                      width={24}
+                      height={24}
+                      loading="lazy"
                     />
 
                     <span className="text-sm">{author}</span>
