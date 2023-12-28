@@ -33,9 +33,9 @@ jobs:
         id: lint
         run: |
           if pnpm run lint; then
-            echo "::set-output name=lint-passed::true"
+            echo "lint-passed=true" >> $GITHUB_ENV
           else
-            echo "::set-output name=lint-passed::false"
+            echo "lint-passed=false" >> $GITHUB_ENV
             exit 1
           fi
 
