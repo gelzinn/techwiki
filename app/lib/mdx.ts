@@ -52,7 +52,7 @@ export const getNotes = async () => {
   const html = await res.text();
 
   const findThis = `${repo}/wiki/`;
-  const filterThis = ['_toc', '_history', '_edit', '_new'];
+  const filterThis = ['_toc', '_history', '_edit', '_new', '_delete', 'Home'];
 
   const links = html
     .split(findThis)
