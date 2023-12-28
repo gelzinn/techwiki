@@ -1,4 +1,4 @@
-name: Test and deploy
+name: Deploy project
 
 on:
   push:
@@ -6,9 +6,12 @@ on:
       - main
 
 jobs:
-  test:
-    name: Test and lint the project
+  lint:
+    name: Linting errors
     runs-on: ubuntu-latest
+    outputs:
+      lint-passed: ${{ steps.set-output.outputs.lint-passed }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -30,15 +33,90 @@ jobs:
         run: pnpm install
 
       - name: Check for linting errors
-        id: lint
+        id: set-output
         run: |
-          if pnpm run lint; then
-            echo "lint-passed=true" >> $GITHUB_ENV
+          output=$(npm run lint) || true
+          echo "$output"
+          if [[ "$output" == *"error"* ]]; then
+            echo "LINT_PASSED=false" >> $GITHUB_ENV
           else
-            echo "lint-passed=false" >> $GITHUB_ENV
+            echo "LINT_PASSED=true" >> $GITHUB_ENV
+          fi
+
+  test:
+    name: Running tests
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use PNPM package manager
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.6.1
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build the project
+        id: build
+        run: |
+          if [ "$LINT_PASSED" == "true" ]; then
+            pnpm run build
+          else
+            echo "❌ Linting failed. Stopping all processes."
             exit 1
           fi
 
+      - name: Run tests
+        run: pnpm run test
+
+  deploy:
+    name: Deploying project
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use PNPM package manager
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.6.1
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Build the project
         run: pnpm run build
-        if: steps.lint.outputs.lint-passed == 'true'
+
+      - name: Deploy to Vercel
+        run: |
+          if [ "$LINT_PASSED" == "true" ]; then
+            pnpm exec vercel --prod
+          else
+            echo "❌ Linting failed. Stopping all processes."
+            exit 1
+          fi
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
