@@ -38,7 +38,6 @@ export default function RootLayout({ children }: any) {
             name="google-adsense-account"
             content="ca-pub-8214931196684102"
           />
-
           <link rel="icon" href="/favicon.ico" />
         </head>
 
