@@ -13,7 +13,8 @@
     "start": "next start",
     "preview": "next build && next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "test": "echo \"✔ No tests yet, but you can add them!\" && exit 0"
   },
   "prettier": {
     "arrowParens": "always",
