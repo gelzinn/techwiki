@@ -1,3 +1,4 @@
 # These are supported funding model platforms
 
-github: gelzinn
+github: [gelzinn]
+custom: [wiki.gelzin.com]
