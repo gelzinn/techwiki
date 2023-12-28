@@ -60,7 +60,7 @@ export default async function NotePage({
         aria-label="Note"
       >
         {thumbnail && (
-          <picture className="mx-auto mb-8 aspect-video select-none overflow-hidden rounded-md">
+          <picture className="mx-auto mb-8 aspect-video select-none overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
             <source srcSet={thumbnail} />
             <source srcSet={thumbnail} />
             <img
