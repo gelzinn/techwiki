@@ -71,13 +71,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Check for linting errors
         run: pnpm run lint
 
   deploy:
     name: Deploying project
     runs-on: ubuntu-latest
-    needs: build
+
+    needs: [build, lint]
+
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
