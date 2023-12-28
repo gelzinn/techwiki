@@ -9,8 +9,6 @@ jobs:
   lint:
     name: Linting errors
     runs-on: ubuntu-latest
-    outputs:
-      lint-passed: ${{ steps.set-output.outputs.lint-passed }}
 
     steps:
       - name: Checkout repository
@@ -33,15 +31,7 @@ jobs:
         run: pnpm install
 
       - name: Check for linting errors
-        id: set-output
-        run: |
-          output=$(pnpm run lint)
-          echo "$output"
-          if [[ "$output" == *"error"* ]]; then
-            echo "LINT_PASSED=false" >> $GITHUB_ENV
-          else
-            echo "LINT_PASSED=true" >> $GITHUB_ENV
-          fi
+        run: pnpm run lint
 
   test:
     name: Running tests
@@ -69,14 +59,7 @@ jobs:
         run: pnpm install
 
       - name: Build the project
-        id: build
-        run: |
-          if [ "$LINT_PASSED" == "true" ]; then
-            pnpm run build
-          else
-            echo "❌ Linting failed. Stopping all processes."
-            exit 1
-          fi
+        run: pnpm run build
 
       - name: Run tests
         run: pnpm run test
@@ -111,12 +94,6 @@ jobs:
         run: pnpm run build
 
       - name: Deploy to Vercel
-        run: |
-          if [ "$LINT_PASSED" == "true" ]; then
-            pnpm exec vercel --prod
-          else
-            echo "❌ Linting failed. Stopping all processes."
-            exit 1
-          fi
+        run: pnpm exec vercel --prod
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
