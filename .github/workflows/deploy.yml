@@ -94,6 +94,6 @@ jobs:
         run: pnpm run build
 
       - name: Deploy to Vercel
-        run: pnpm exec vercel --prod
+        run: pnpm exec vercel -- --prod
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
