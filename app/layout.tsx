@@ -19,7 +19,6 @@ export const metadata = {
   authors: seo.authors,
   creator: seo.creator,
   url: seo.url,
-  openGraph: seo.openGraph,
 };
 
 const font = Ubuntu({
