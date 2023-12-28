@@ -17,7 +17,12 @@ export const getNote = async (s: string) => {
 
   const url = `${baseUrl}/${slug}.md`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    mode: 'no-cors',
+    next: {
+      revalidate,
+    },
+  });
   const source = await res.text();
 
   const { frontmatter, content } = await compileMDX({
