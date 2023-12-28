@@ -19,7 +19,7 @@ export default async function NotePage({
   const { authors, categories, description, thumbnail, title, date } = meta;
 
   return (
-    <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8 text-justify">
+    <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8">
       <section
         className="mx-auto mb-8 flex h-16 w-full max-w-3xl items-center justify-start gap-4 border-b border-zinc-200 pb-4 text-sm dark:border-zinc-900"
         aria-label="Breadcrumb"
