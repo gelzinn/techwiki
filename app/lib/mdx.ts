@@ -1,10 +1,12 @@
 import { compileMDX } from 'next-mdx-remote/rsc';
+
 import {
   defaultWikiUrl as baseUrl,
   repo,
-  revalidateAt as revalidate,
   wikiPagesUrl as wikiUrl,
 } from 'app/config/content';
+
+import { notes as notesEnv } from 'app/config/env';
 
 export const getNote = async (s: string) => {
   const slug = s
@@ -20,7 +22,7 @@ export const getNote = async (s: string) => {
   const res = await fetch(url, {
     mode: 'no-cors',
     next: {
-      revalidate,
+      revalidate: notesEnv.revalidate,
     },
   });
   const source = await res.text();
@@ -43,7 +45,7 @@ export const getNotes = async () => {
   const res = await fetch(wikiUrl, {
     mode: 'no-cors',
     next: {
-      revalidate,
+      revalidate: notesEnv.revalidate,
     },
   });
 
