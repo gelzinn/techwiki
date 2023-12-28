@@ -16,27 +16,51 @@ export default async function NotePage({
   params: { slug: string };
 }) {
   const { meta, content }: any = await getNoteContent(params.slug);
-  const { authors, categories, description, thumbnail, title } = meta;
+  const { authors, categories, description, thumbnail, title, date } = meta;
 
   return (
     <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8 text-justify">
-      <h1 className="relative mb-8 flex w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium lg:justify-center dark:border-zinc-900">
+      <section
+        className="mx-auto mb-8 flex h-16 w-full max-w-3xl items-center justify-start gap-4 border-b border-zinc-200 pb-4 text-sm dark:border-zinc-900"
+        aria-label="Breadcrumb"
+      >
         <Link
           href="/notes"
-          className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 lg:absolute lg:left-0 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+          className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
         >
-          <span className="sr-only">Notes</span>
+          <span className="sr-only">Home</span>
           <ChevronLeft className="h-4 w-4" />
         </Link>
-        <span className="text-center text-xl sm:text-3xl">{title}</span>
-      </h1>
+
+        <Link
+          href="/notes"
+          className="text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+          aria-label="All notes"
+        >
+          All notes
+        </Link>
+
+        <span
+          className="pointer-events-none select-none text-sm text-zinc-500 dark:text-zinc-400"
+          aria-hidden="true"
+        >
+          /
+        </span>
+
+        <span
+          className="pointer-events-none select-none text-sm text-zinc-500 dark:text-zinc-400"
+          aria-label={title}
+        >
+          {title}
+        </span>
+      </section>
 
       <section
-        className="mx-auto flex w-full max-w-3xl flex-col items-start justify-start gap-4"
+        className="mx-auto flex w-full max-w-3xl flex-col items-start justify-start"
         aria-label="Note"
       >
         {thumbnail && (
-          <picture className="mx-auto mb-4 aspect-video select-none overflow-hidden rounded-md">
+          <picture className="mx-auto mb-8 aspect-video select-none overflow-hidden rounded-md">
             <source srcSet={thumbnail} />
             <source srcSet={thumbnail} />
             <img
@@ -48,24 +72,6 @@ export default async function NotePage({
         )}
 
         <article className="flex w-full flex-col items-start justify-start gap-4">
-          <section
-            className="mb-4 flex w-full flex-wrap items-center justify-start gap-2"
-            aria-label="Categories"
-          >
-            {categories &&
-              categories.map((category: any, index: number) => {
-                return (
-                  <Link
-                    key={index}
-                    href={`/notes?category=${category}`}
-                    className="inline-block rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400"
-                  >
-                    {category}
-                  </Link>
-                );
-              })}
-          </section>
-
           <section
             className="mb-4 flex w-full flex-col items-start justify-start gap-1"
             aria-label="Title and description"
@@ -160,11 +166,55 @@ export default async function NotePage({
           </section>
 
           <section
-            className="mb-4 flex w-full flex-col items-start justify-start gap-4"
+            className="mb-4 flex w-full flex-col items-start justify-start gap-4 border-b border-zinc-200 pb-4 dark:border-zinc-900"
             aria-label="Content"
           >
             <MDX>{content}</MDX>
           </section>
+
+          <footer className="grid w-full grid-cols-1 gap-4 sm:mb-4 sm:grid-cols-2">
+            <section
+              className="mb-4 flex w-full flex-wrap items-start justify-center gap-2 sm:justify-start"
+              aria-label="Categories"
+            >
+              {categories &&
+                categories.map((category: any, index: number) => {
+                  return (
+                    <Link
+                      key={index}
+                      href={`/notes?category=${category}`}
+                      className="inline-block rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400"
+                    >
+                      {category}
+                    </Link>
+                  );
+                })}
+            </section>
+
+            <section
+              className="mb-4 flex w-full flex-wrap items-start justify-center gap-2 sm:justify-end"
+              aria-label="Date"
+            >
+              <span
+                className="text-right text-sm text-zinc-500 dark:text-zinc-400"
+                aria-label="Last updated"
+              >
+                Posted on{' '}
+                <time
+                  dateTime={date}
+                  className="text-left text-zinc-500 dark:text-zinc-400"
+                >
+                  {new Date(date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })}
+                </time>
+              </span>
+            </section>
+          </footer>
         </article>
       </section>
     </main>

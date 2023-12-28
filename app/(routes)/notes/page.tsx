@@ -1,13 +1,14 @@
+import Link from 'next/link';
+
 import { getNotes } from 'app/lib/mdx';
 import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
 
 export default async function Notes() {
   const posts = await getNotes();
 
   return (
     <main className="mx-auto flex w-full max-w-screen-full-hd flex-col items-start justify-center p-4 py-8">
-      <h1 className="mb-8 flex w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900">
+      <h1 className="mb-8 flex h-16 w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900">
         <Link
           href="/"
           className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
@@ -33,14 +34,16 @@ export default async function Notes() {
                   href={`/notes/${slug}`}
                   className="flex items-center justify-start gap-4 font-medium dark:border-zinc-900"
                 >
-                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md">
-                    <source srcSet={thumbnail} />
-                    <source srcSet={thumbnail} />
-                    <img
-                      src={thumbnail}
-                      alt={title}
-                      className="pointer-events-none aspect-video select-none"
-                    />
+                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-900">
+                    {thumbnail ? (
+                      <img
+                        src={thumbnail}
+                        alt={title}
+                        className="pointer-events-none aspect-video select-none rounded-md bg-zinc-100 dark:bg-zinc-900"
+                      />
+                    ) : (
+                      <div className="pointer-events-none aspect-video select-none rounded-md bg-zinc-100 dark:bg-zinc-900" />
+                    )}
                   </picture>
                 </Link>
 
@@ -63,14 +66,14 @@ export default async function Notes() {
                 </section>
 
                 <section
-                  className="mb-4 flex w-full flex-col items-start justify-start gap-1"
+                  className="mb-4 flex w-full flex-1 flex-col items-start justify-start gap-1"
                   aria-label="Title and description"
                 >
                   <strong className="w-full font-medium tracking-tight">
                     {title}
                   </strong>
 
-                  <p className="w-full text-zinc-500 dark:text-zinc-400">
+                  <p className="h-full w-full text-sm text-zinc-500 dark:text-zinc-400">
                     {description}
                   </p>
                 </section>
