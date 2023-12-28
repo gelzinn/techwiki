@@ -1,0 +1,38 @@
+name: Release new version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    if: ${{ github.repository_owner == 'gelzinn' }}
+    name: Release new version of the project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use PNPM package manager
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.6.1
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          version: 8.6.1
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install NPM Dependencies
+        run: pnpm install
+
+      - name: Lint for valid syntax
+        run: pnpm run lint
+
+      - name: Build the project
+        run: pnpm run build
