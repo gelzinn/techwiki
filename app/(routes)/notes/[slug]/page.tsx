@@ -61,9 +61,7 @@ export default async function NotePage({
         aria-label="Note"
       >
         {thumbnail && (
-          <picture className="mx-auto mb-8 aspect-video select-none overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
-            <source srcSet={thumbnail} />
-            <source srcSet={thumbnail} />
+          <picture className="mx-auto mb-8 aspect-video w-full select-none overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
             <img
               src={thumbnail}
               alt={title}
@@ -74,7 +72,7 @@ export default async function NotePage({
 
         <section
           className="mb-4 flex w-full flex-wrap items-center justify-start gap-2 border-b border-zinc-200 pb-4 dark:border-zinc-900"
-          aria-label="Informations"
+          aria-label="Information"
         >
           <section
             className="mb-4 flex w-full flex-col items-start justify-start gap-1"

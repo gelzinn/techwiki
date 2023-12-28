@@ -18,7 +18,7 @@ export default async function Notes() {
           <span className="sr-only">Home</span>
           <ChevronLeft className="h-4 w-4" />
         </Link>
-        <span className="text-3xl">All notes</span>
+        <span className="text-xl sm:text-3xl">All notes</span>
       </h1>
 
       <ul className="grid w-full grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -34,14 +34,14 @@ export default async function Notes() {
               >
                 <Link
                   href={`/notes/${slug}`}
-                  className="flex items-center justify-start gap-4 font-medium dark:border-zinc-900"
+                  className="mb-4 flex w-full items-center justify-start gap-4 font-medium dark:border-zinc-900"
                 >
-                  <picture className="pointer-events-none mb-4 aspect-video w-full overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
+                  <picture className="pointer-events-none aspect-video h-full w-full overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
                     {thumbnail ? (
                       <img
                         src={thumbnail}
                         alt={title}
-                        className="pointer-events-none aspect-video select-none rounded-md bg-zinc-100 dark:bg-zinc-900"
+                        className="pointer-events-none aspect-video w-full select-none rounded-md bg-zinc-100 object-cover dark:bg-zinc-900"
                       />
                     ) : (
                       <div className="pointer-events-none aspect-video select-none rounded-md bg-zinc-100 dark:bg-zinc-900" />
