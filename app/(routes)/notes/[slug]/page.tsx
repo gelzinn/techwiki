@@ -4,6 +4,7 @@ import { getNote } from '../../../lib/mdx';
 
 import { ChevronLeft } from 'lucide-react';
 import MDX from 'app/components/mdx';
+import { Fragment } from 'react';
 
 const getNoteContent = async (slug: string) => {
   const { meta, content } = await getNote(slug);
@@ -94,26 +95,33 @@ export default async function NotePage({
           >
             {authors && authors.length > 0 ? (
               authors.map((author: string, index: number) => (
-                <Link
-                  key={index}
-                  className={`gap- flex items-center justify-start${
-                    index === authors.length - 1 ? '2' : '1'
-                  }`}
-                  href={`/notes?author=${author}`}
-                >
-                  <img
-                    src={`https://github.com/${author}.png`}
-                    alt={author}
-                    className="pointer-events-none h-6 w-6 select-none rounded-full"
-                  />
+                <Fragment key={index}>
+                  <Link
+                    className="flex items-center justify-start"
+                    href={`/notes?author=${author}`}
+                  >
+                    <img
+                      src={`https://github.com/${author}.png`}
+                      alt={author}
+                      className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full"
+                    />
 
-                  <span className="text-sm">
-                    {author}
-                    {index === authors.length - 1 && '.'}
-                    {index === authors.length - 2 && ' and'}
-                    {index < authors.length - 2 && ','}
-                  </span>
-                </Link>
+                    <span className="text-sm">{author}</span>
+                  </Link>
+
+                  {index === authors.length - 2 && (
+                    <span className="pointer-events-none text-sm text-zinc-400">
+                      {' '}
+                      and
+                    </span>
+                  )}
+
+                  {index < authors.length - 2 && (
+                    <span className="pointer-events-none text-sm text-zinc-400">
+                      ,
+                    </span>
+                  )}
+                </Fragment>
               ))
             ) : (
               <span
