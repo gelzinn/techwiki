@@ -1,35 +1,9 @@
 import { ChevronRight } from 'lucide-react';
 import { CSSProperties } from 'react';
 import { TechWikiLogo } from './components/logo';
+import { cards } from './config/home/cards';
 
 export default function Homepage() {
-  const cards = [
-    {
-      title: 'Getting Started',
-      description:
-        'Learn more about TechWiki and how you can contribute to it.',
-      href: '/docs/getting-started/what-is-techwiki',
-    },
-    {
-      title: 'Community',
-      description:
-        'Learn more about TechWiki and how you can contribute to it.',
-      href: '/docs/community/code-of-conduct',
-    },
-    {
-      title: 'Contributors',
-      description:
-        'Learn more about TechWiki and how you can contribute to it.',
-      href: '/docs/community/contributors',
-    },
-    {
-      title: 'Code of Conduct',
-      description:
-        'Learn more about TechWiki and how you can contribute to it.',
-      href: '/docs/community/code-of-conduct',
-    },
-  ];
-
   return (
     <main
       className="mx-auto grid h-auto w-full max-w-screen-full-hd grid-cols-1 lg:grid-cols-[minmax(250px,_1fr),4fr,minmax(250px,_1fr)]"
