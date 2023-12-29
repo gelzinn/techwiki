@@ -1,13 +1,15 @@
 import { Ubuntu } from 'next/font/google';
 
 import { ThemeProvider } from './contexts/ThemeContext';
-import { Header } from './components/header';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 import { seo } from './config/seo';
+import { theme } from './config/theme';
+
+import { Header } from './components/header';
+import { Footer } from './components/footer';
 
 import '../styles/globals.css';
-import { theme } from './config/theme';
-import { LanguageProvider } from './contexts/LanguageContext';
 
 export const metadata = {
   title: {
@@ -44,10 +46,12 @@ export default function RootLayout({ children }: any) {
             <link rel="icon" href="/favicon.ico" />
           </head>
 
-          <body className="relative h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+          <body className="relative h-auto min-h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
             <Header />
 
             {children}
+
+            <Footer />
           </body>
         </html>
       </ThemeProvider>
