@@ -49,6 +49,7 @@ export default async function Notes() {
                         quality={50}
                         priority
                         loading="eager"
+                        about={`Thumbnail of ${title}`}
                       />
                     ) : (
                       <div className="pointer-events-none aspect-video select-none rounded-md bg-zinc-100 dark:bg-zinc-900" />
@@ -99,10 +100,14 @@ export default async function Notes() {
                           className="flex items-center justify-start"
                           href={`/notes?author=${author}`}
                         >
-                          <img
+                          <Image
                             src={`https://github.com/${author}.png`}
                             alt={author}
-                            className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full"
+                            className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900"
+                            width={24}
+                            height={24}
+                            loading="lazy"
+                            about={`Avatar of ${author}`}
                           />
 
                           <span className="text-sm">{author}</span>
