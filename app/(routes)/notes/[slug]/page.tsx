@@ -109,7 +109,7 @@ export default async function NotePage({
                     <Image
                       src={`https://github.com/${author}.png`}
                       alt={author}
-                      className="pointer-events-none mr-2 h-8 w-8 select-none rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900"
+                      className="pointer-events-none mr-2 h-8 w-8 select-none rounded-full border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900"
                       width={32}
                       height={32}
                       loading="lazy"

@@ -103,7 +103,7 @@ export default async function Notes() {
                           <Image
                             src={`https://github.com/${author}.png`}
                             alt={author}
-                            className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900"
+                            className="pointer-events-none mr-1 h-6 w-6 select-none rounded-full border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900"
                             width={24}
                             height={24}
                             loading="lazy"
