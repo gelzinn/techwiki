@@ -3,8 +3,10 @@ import { CheckCircle } from 'lucide-react';
 
 export const SkewedInfiniteCarousel = ({
   shadow = true,
+  content = features,
 }: {
   shadow?: boolean;
+  content?: string[];
 }) => {
   return (
     <>
@@ -18,7 +20,7 @@ export const SkewedInfiniteCarousel = ({
           </>
         )}
 
-        {features && (
+        {content && (
           <div className="mx-auto grid h-[250px] w-[300px] animate-skew-scroll grid-cols-1 gap-5 sm:w-[600px] sm:grid-cols-2">
             {[...Array(32)].map((_, i) => (
               <div
@@ -30,7 +32,7 @@ export const SkewedInfiniteCarousel = ({
                   aria-hidden="true"
                 />
                 <p className="text-zinc-500 dark:text-zinc-400">
-                  {features[i % features.length]}
+                  {content[i % content.length]}
                 </p>
               </div>
             ))}
