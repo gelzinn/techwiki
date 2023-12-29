@@ -7,7 +7,7 @@ import {
   useLayoutEffect,
   useState,
 } from 'react';
-import { theme as themeConfig } from '../config/theme';
+import { theme as themeConfig } from '@/config/theme';
 
 const defaultTheme = themeConfig.defaultTheme as ThemeType;
 

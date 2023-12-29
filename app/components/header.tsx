@@ -1,6 +1,6 @@
 'use client';
 
-import { useTheme } from 'app/hooks/useTheme';
+import { useTheme } from '@/hooks/useTheme';
 
 import { Menu, Moon, PanelRightClose, Sun } from 'lucide-react';
 import { TechWikiLogo } from './logo';

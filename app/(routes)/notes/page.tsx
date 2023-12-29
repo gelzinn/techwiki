@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 import { ArrowRight, ChevronLeft } from 'lucide-react';
 
-import { getNotes } from 'app/lib/mdx';
-import { formatTimeDifference } from 'app/lib/formatters/timeDifference';
+import { getNotes } from '@/lib/mdx';
+import { formatTimeDifference } from '@/lib/formatters/timeDifference';
 
-import { IPost } from 'app/@types/post';
+import { IPost } from '@/@types/post';
 
 export default async function Notes() {
   const posts = await getNotes();

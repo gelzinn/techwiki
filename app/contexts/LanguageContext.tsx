@@ -1,6 +1,6 @@
 'use client';
 
-import { supportedLanguages, defaultLanguage } from 'app/config/language';
+import { supportedLanguages, defaultLanguage } from '@/config/language';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
 const default_language = defaultLanguage;

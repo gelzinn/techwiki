@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { getNote } from '../../../lib/mdx';
-
 import { ChevronLeft } from 'lucide-react';
-import MDX from 'app/components/mdx';
 import { Fragment } from 'react';
+
+import { getNote } from '@/lib/mdx';
+import MDX from '@/components/mdx';
 
 const getNoteContent = async (slug: string) => {
   const { meta, content } = await getNote(slug);
@@ -34,27 +34,32 @@ export default async function NotePage({
           <ChevronLeft className="h-4 w-4" />
         </Link>
 
-        <Link
-          href="/notes"
-          className="text-sm text-zinc-500 hover:underline dark:text-zinc-400"
-          aria-label="All notes"
+        <section
+          className="scrollbar-none flex items-center justify-start gap-2 overflow-x-auto whitespace-nowrap text-nowrap"
+          aria-label="Breadcrumb"
         >
-          All notes
-        </Link>
+          <Link
+            href="/notes"
+            className="text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+            aria-label="All notes"
+          >
+            All notes
+          </Link>
 
-        <span
-          className="pointer-events-none select-none text-sm text-zinc-500 dark:text-zinc-400"
-          aria-hidden="true"
-        >
-          /
-        </span>
+          <span
+            className="pointer-events-none select-none text-sm text-zinc-500 dark:text-zinc-400"
+            aria-hidden="true"
+          >
+            /
+          </span>
 
-        <span
-          className="pointer-events-none select-none text-sm text-zinc-500 dark:text-zinc-400"
-          aria-label={title}
-        >
-          {title}
-        </span>
+          <span
+            className="pointer-events-none select-none text-sm text-zinc-500 dark:text-zinc-400"
+            aria-label={title}
+          >
+            {title}
+          </span>
+        </section>
       </header>
 
       <section

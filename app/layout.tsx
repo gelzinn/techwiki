@@ -1,13 +1,13 @@
 import { Ubuntu } from 'next/font/google';
 
-import { ThemeProvider } from './contexts/ThemeContext';
-import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
-import { seo } from './config/seo';
-import { theme } from './config/theme';
+import { seo } from '@/config/seo';
+import { theme } from '@/config/theme';
 
-import { Header } from './components/header';
-import { Footer } from './components/footer';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 import '../styles/globals.css';
 
@@ -20,7 +20,6 @@ export const metadata = {
   keywords: seo.keywords,
   authors: seo.authors,
   creator: seo.creator,
-  url: seo.url,
 };
 
 const font = Ubuntu({
