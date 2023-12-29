@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react';
 import { vi, afterEach, describe, expect, test, vitest } from 'vitest';
 
-import { Flag } from './index';
-
+import { Flag } from '@/components/flag';
 import { mock_data } from './mock-data';
 
 const countryCode = 'us';
