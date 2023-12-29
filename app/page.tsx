@@ -1,5 +1,7 @@
-import { ChevronRight } from 'lucide-react';
 import { CSSProperties } from 'react';
+
+import { ChevronRight } from 'lucide-react';
+
 import { TechWikiLogo } from './components/logo';
 import { cards } from './config/home/cards';
 
