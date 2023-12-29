@@ -67,7 +67,7 @@ export default async function NotePage({
               src={thumbnail}
               alt={title}
               className="pointer-events-none aspect-video w-full max-w-3xl select-none"
-              objectFit="cover"
+              style={{ objectFit: 'cover' }}
               width={640}
               height={360}
               quality={100}

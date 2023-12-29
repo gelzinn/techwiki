@@ -43,7 +43,7 @@ export default async function Notes() {
                         src={thumbnail}
                         alt={title}
                         className="pointer-events-none aspect-video w-full select-none rounded-md bg-zinc-100 object-cover dark:bg-zinc-900"
-                        objectFit="cover"
+                        style={{ objectFit: 'cover' }}
                         width={640}
                         height={360}
                         quality={50}
