@@ -1,6 +1,5 @@
-import { CheckCircle } from 'lucide-react';
-
 import { features } from '@/config/content';
+import { CheckCircle } from 'lucide-react';
 
 export const SkewedInfiniteCarousel = ({
   shadow = true,
@@ -19,22 +18,24 @@ export const SkewedInfiniteCarousel = ({
           </>
         )}
 
-        <div className="mx-auto grid h-[250px] w-[300px] animate-skew-scroll grid-cols-1 gap-5 sm:w-[600px] sm:grid-cols-2">
-          {[...Array(32)].map((_, i) => (
-            <div
-              key={i}
-              className="flex cursor-pointer items-center space-x-2 rounded-md border border-zinc-200 bg-zinc-100 p-4 shadow-md transition-all hover:-translate-y-1 hover:translate-x-1 hover:scale-[1.025] hover:shadow-xl dark:border-zinc-900 dark:bg-zinc-950"
-            >
-              <CheckCircle
-                className="h-4 w-4 text-emerald-500"
-                aria-hidden="true"
-              />
-              <p className="text-zinc-500 dark:text-zinc-400">
-                {features[i % features.length]}
-              </p>
-            </div>
-          ))}
-        </div>
+        {features && (
+          <div className="mx-auto grid h-[250px] w-[300px] animate-skew-scroll grid-cols-1 gap-5 sm:w-[600px] sm:grid-cols-2">
+            {[...Array(32)].map((_, i) => (
+              <div
+                key={i}
+                className="flex cursor-pointer items-center space-x-2 rounded-md border border-zinc-200 bg-zinc-100 p-4 shadow-md transition-all hover:-translate-y-1 hover:translate-x-1 hover:scale-[1.025] hover:shadow-xl dark:border-zinc-900 dark:bg-zinc-950"
+              >
+                <CheckCircle
+                  className="h-4 w-4 text-emerald-500"
+                  aria-hidden="true"
+                />
+                <p className="text-zinc-500 dark:text-zinc-400">
+                  {features[i % features.length]}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
