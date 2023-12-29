@@ -28,12 +28,9 @@
     "preserveWatchOutput": true,
     "baseUrl": ".",
     "paths": {
-      "@root/*": [
-        "./*"
-      ],
       "@/*": [
-        "./app/*"
-      ],
+        "app/*"
+      ]
     },
     "plugins": [
       {
