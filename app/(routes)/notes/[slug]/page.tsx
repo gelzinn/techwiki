@@ -7,17 +7,14 @@ import { Fragment } from 'react';
 import { getNote } from '@/lib/mdx';
 import MDX from '@/components/mdx';
 
-const getNoteContent = async (slug: string) => {
-  const { meta, content } = await getNote(slug);
-  return { meta, content };
-};
-
 export default async function NotePage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { meta, content }: any = await getNoteContent(params.slug);
+  const { slug } = params;
+
+  const { meta, content }: any = await getNote(slug);
   const { authors, categories, description, thumbnail, title, date } = meta;
 
   return (
