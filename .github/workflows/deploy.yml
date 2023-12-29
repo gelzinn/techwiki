@@ -31,7 +31,7 @@ jobs:
         run: pnpm install
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: |
             ~/.pnpm-store
@@ -63,7 +63,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Restore dependencies from cache
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: |
             ~/.pnpm-store
@@ -103,7 +103,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Restore dependencies from cache
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: |
             ~/.pnpm-store
@@ -112,6 +112,6 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Deploy to Vercel
-        run: echo Y | pnpm exec vercel . --prod --token $VERCEL_TOKEN --confirm
+        run: echo Y | pnpm exec vercel . --prod --token $VERCEL_TOKEN --yes
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
