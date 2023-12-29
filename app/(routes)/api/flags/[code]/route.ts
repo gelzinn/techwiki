@@ -25,16 +25,14 @@ export async function GET(
 ) {
   const { code } = context.params;
 
-  if (!code || code.length !== 2) {
-    return NextResponse.json(
-      { error: 'Country code is required' },
-      { status: 400 },
-    );
-  }
-
   const countries = Object.keys(getCountries());
 
-  if (!countries.includes(code.toUpperCase())) {
+  if (
+    !code ||
+    code.length !== 2 ||
+    code.match(/[^a-zA-Z]/) ||
+    !countries.includes(code.toUpperCase())
+  ) {
     return NextResponse.json(
       { error: 'Country code is not valid' },
       { status: 400 },
