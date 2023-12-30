@@ -165,7 +165,7 @@ export default async function NotePage({
                     <Link
                       key={index}
                       href={`/notes?category=${category}`}
-                      className="inline-block rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-300 hover:bg-zinc-200 hover:text-zinc-600"
+                      className="inline-block rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
                     >
                       {category}
                     </Link>
