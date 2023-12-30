@@ -29,7 +29,7 @@ export async function GET() {
       )
       .map(decodeURIComponent);
 
-    if (!links) return [];
+    if (!links) return NextResponse.json({ data: [] }, { status: 200 });
 
     const notes: any = await Promise.all(
       links.map(async (link) => {
