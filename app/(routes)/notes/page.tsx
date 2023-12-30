@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 import { ArrowRight, ChevronLeft } from 'lucide-react';
 
-import { getNotes } from '@/lib/mdx';
+import { getNotes } from '@/lib/notes';
 import { formatTimeDifference } from '@/lib/formatters/timeDifference';
 
 import { IPost } from '@/@types/post';

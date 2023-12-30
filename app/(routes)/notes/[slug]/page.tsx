@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ChevronLeft } from 'lucide-react';
 import { Fragment } from 'react';
 
-import { getNote } from '@/lib/mdx';
+import { getNote } from '@/lib/notes';
 import MDX from '@/components/mdx';
 
 export default async function NotePage({
