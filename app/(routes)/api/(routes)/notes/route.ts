@@ -29,7 +29,15 @@ export async function GET(request: Request) {
     const html = await res.text();
 
     const findThis = `${repo}/wiki/`;
-    const filterThis = ['_toc', '_history', '_edit', '_new', '_delete', 'Home'];
+    const filterThis = [
+      '_toc',
+      '_history',
+      '_edit',
+      '_new',
+      '_delete',
+      'Home',
+      'home',
+    ];
 
     const links = html
       .split(findThis)
@@ -83,6 +91,11 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ data: sortedNotes }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'Error on fetching notes',
+      },
+      { status: 500 },
+    );
   }
 }
