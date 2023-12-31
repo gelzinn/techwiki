@@ -1,5 +1,9 @@
 'use client';
 
+import { TechWikiLogo } from '@/components/logo';
+
+import { GithubIcon } from 'lucide-react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -27,11 +31,43 @@ export default function AuthPage() {
           <MasonryLayout notes={notes} />
         </section>
 
-        <section className="flex flex-1 flex-col items-center justify-center gap-4 border-zinc-200 p-8 lg:border-l dark:border-zinc-900">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <span className="text-4xl font-bold">Sign in to TechWiki</span>
-            <span className="text-zinc-500 dark:text-zinc-400">
-              Sign in to TechWiki to contribute to the community.
+        <section className="flex flex-1 flex-col items-center justify-center gap-4 border-zinc-200 p-4 sm:p-8 lg:border-l dark:border-zinc-900">
+          <div className="flex h-full w-full max-w-md flex-col items-center justify-center gap-4 text-center">
+            <TechWikiLogo />
+
+            <section className="my-auto flex w-full flex-col items-center justify-center gap-4">
+              <h1 className="flex flex-col items-center justify-center gap-2 text-balance text-2xl font-semibold tracking-title text-zinc-900 sm:flex-row sm:text-4xl dark:text-zinc-100">
+                Ready to learn something new today?
+              </h1>
+
+              <p className="text-balance text-sm text-zinc-500 dark:text-zinc-400">
+                Everything a developer needs. All in one place.
+              </p>
+
+              <button className="mt-4 flex w-full items-center justify-center gap-4 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-3 transition-all hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                <GithubIcon size={20} />
+                <span className="text-zinc-500 dark:text-zinc-400">
+                  Sign in with GitHub
+                </span>
+              </button>
+            </section>
+
+            <span className="text-sm text-zinc-500 dark:text-zinc-400">
+              By continuing, you agree to our{' '}
+              <Link
+                href="/terms"
+                className="text-zinc-500 underline dark:text-zinc-400"
+              >
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link
+                href="/privacy"
+                className="text-zinc-500 underline dark:text-zinc-400"
+              >
+                Privacy Policy
+              </Link>
+              . TechWiki is not affiliated with GitHub.
             </span>
           </div>
         </section>
@@ -61,6 +97,7 @@ const MasonryLayout = ({ notes }: any) => (
       }}
       className="group flex w-full flex-1 skew-x-[5deg] scale-110 gap-4"
       columnClassName="flex flex-col gap-4"
+      about="Recent notes"
     >
       {Array.from({ length: 32 }, (_, i) => i % notes.length).map(
         (index, i) => {
