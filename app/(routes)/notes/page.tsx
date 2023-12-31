@@ -136,7 +136,7 @@ export default function Notes() {
                         className="flex items-center justify-start rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
                         onClick={() => handleRemoveFilter('category', category)}
                       >
-                        <span className="text-sm">{category}</span>
+                        <span className="text-sm">category: {category}</span>
                         <span className="sr-only">Remove filter</span>
 
                         <X className="ml-1 h-4 w-4" />
@@ -308,7 +308,14 @@ export default function Notes() {
                   );
                 })
             ) : (
-              <li>No notes yet.</li>
+              <div
+                className="flex w-full flex-col items-start justify-start gap-4"
+                aria-label="No notes found"
+              >
+                <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                  No notes found.
+                </span>
+              </div>
             )}
           </ul>
         </>
