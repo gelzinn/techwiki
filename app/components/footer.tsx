@@ -12,7 +12,7 @@ export const Footer = () => {
           <a
             target="_blank"
             href="https://github.com/gelzinn/techwiki/wiki"
-            className="ml-1 text-zinc-600 dark:text-zinc-300 hover:underline"
+            className="ml-1 text-zinc-600 hover:underline dark:text-zinc-300" rel="noreferrer"
           >
             GitHub Wiki
           </a>
