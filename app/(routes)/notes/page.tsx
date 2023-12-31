@@ -60,7 +60,7 @@ export default function Notes() {
     const category = search.get('category') || '';
 
     if (!author && !category) return setPosts(fetchedPosts);
-  }, [filters]);
+  }, [search, fetchedPosts, filters]);
 
   useEffect(() => {
     const author = search.get('author') || '';
@@ -98,13 +98,13 @@ export default function Notes() {
     });
 
     setPosts(filteredPosts);
-  }, [search]);
+  }, [search, fetchedPosts]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setLoading(true);
-
       try {
+        setLoading(true);
+
         const res = await fetch('/api/notes');
         const { data } = await res.json();
 
@@ -122,7 +122,7 @@ export default function Notes() {
 
   return (
     <main className="mx-auto flex h-auto min-h-screen w-full max-w-screen-full-hd flex-col items-start justify-start p-4 py-8">
-      {!loading && posts ? (
+      {!loading && posts && posts.length > 0 ? (
         <>
           <h1 className="mb-8 flex h-16 w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900">
             <Link
@@ -185,7 +185,7 @@ export default function Notes() {
               </section>
             )}
 
-          <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <ul className="grid w-full grid-cols-1 gap-4 divide-y divide-zinc-200 sm:grid-cols-2 sm:divide-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 dark:divide-zinc-900">
             {posts.length > 0 ? (
               posts
                 .sort((a: IPost, b: IPost) => {
@@ -207,7 +207,7 @@ export default function Notes() {
                   return (
                     <li
                       key={index}
-                      className="flex w-full flex-col items-start justify-start overflow-hidden"
+                      className="flex w-full flex-col items-start justify-start overflow-hidden pb-4 pt-8 first-of-type:pt-0 sm:py-0"
                     >
                       <Link
                         href={`/notes/${slug}`}
