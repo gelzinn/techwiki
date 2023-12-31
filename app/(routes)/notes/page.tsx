@@ -1,16 +1,74 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Fragment } from 'react';
-import { ArrowRight, ChevronLeft } from 'lucide-react';
+import { Fragment, useEffect, useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
-import { getNotes } from '@/lib/notes';
+import { ArrowRight, ChevronLeft, X } from 'lucide-react';
+
 import { formatTimeDifference } from '@/lib/formatters/timeDifference';
 
 import { IPost } from '@/@types/post';
 
-export default async function Notes() {
-  const posts = await getNotes();
+export default function Notes() {
+  const router = useRouter();
+  const search = useSearchParams();
+
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [filters, setFilters] = useState<any>({});
+
+  const handleRemoveFilter = (filter: string, value: string) => {
+    setFilters((prevFilters: any) => {
+      const newFilters = { ...prevFilters };
+
+      if (newFilters[filter]) {
+        const newFilter = newFilters[filter]
+          .split(',')
+          .filter((f: string) => f !== value)
+          .join(',');
+
+        if (newFilter) newFilters[filter] = newFilter;
+        else delete newFilters[filter];
+      }
+
+      return newFilters;
+    });
+
+    const newQuery = new URLSearchParams(search.toString());
+
+    if (newQuery.get(filter)) {
+      const newFilter = newQuery
+        .get(filter)
+        ?.split(',')
+        .filter((f: string) => f !== value)
+        .join(',');
+
+      if (newFilter) newQuery.set(filter, newFilter);
+      else newQuery.delete(filter);
+    }
+
+    router.push(`/notes?${newQuery.toString()}`);
+  };
+
+  useEffect(() => {
+    setFilters({
+      author: search.get('author') || '',
+      category: search.get('category') || '',
+    });
+
+    const getNotesData = async () => {
+      const { data } = await fetch(`/api/notes?${search.toString()}`)
+        .then((res) => res.json())
+        .catch((err) => console.error(err));
+
+      if (data) setPosts(data);
+      else setPosts([]);
+    };
+
+    getNotesData();
+  }, [search]);
 
   return (
     <main className="mx-auto flex h-auto min-h-screen w-full max-w-screen-full-hd flex-col items-start justify-start p-4 py-8">
@@ -24,6 +82,54 @@ export default async function Notes() {
         </Link>
         <span className="text-xl sm:text-3xl">All notes</span>
       </h1>
+
+      {filters &&
+        (filters.author || filters.category) &&
+        Object.keys(filters).length > 0 && (
+          <section
+            className="mb-8 pb-4 flex w-full items-center justify-start gap-2"
+            aria-label="Filters"
+          >
+            <strong
+              className="font-semibold text-sm text-zinc-500 dark:text-zinc-400"
+              aria-label="Filtering by"
+            >
+              Filtering by:{' '}
+            </strong>
+
+            {filters.author &&
+              filters.author.split(',').map((author: string, index: number) => (
+                <button
+                  key={index}
+                  className="flex items-center justify-start bg-zinc-100 dark:bg-zinc-900 rounded-md px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                  onClick={() => handleRemoveFilter('author', author)}
+                >
+                  <span className="text-sm">
+                    <strong>author:</strong> {author}
+                  </span>
+                  <span className="sr-only">Remove filter</span>
+
+                  <X className="h-4 w-4 ml-1" />
+                </button>
+              ))}
+
+            {filters.category &&
+              filters.category
+                .split(',')
+                .map((category: string, index: number) => (
+                  <button
+                    key={index}
+                    className="flex items-center justify-start bg-zinc-100 dark:bg-zinc-900 rounded-md px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                    onClick={() => handleRemoveFilter('category', category)}
+                  >
+                    <span className="text-sm">{category}</span>
+                    <span className="sr-only">Remove filter</span>
+
+                    <X className="h-4 w-4 ml-1" />
+                  </button>
+                ))}
+          </section>
+        )}
 
       <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {posts && posts.length > 0 ? (
