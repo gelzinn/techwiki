@@ -87,11 +87,11 @@ export default function Notes() {
         (filters.author || filters.category) &&
         Object.keys(filters).length > 0 && (
           <section
-            className="mb-8 pb-4 flex w-full items-center justify-start gap-2"
+            className="mb-8 flex w-full items-center justify-start gap-2 pb-4"
             aria-label="Filters"
           >
             <strong
-              className="font-semibold text-sm text-zinc-500 dark:text-zinc-400"
+              className="text-sm font-semibold text-zinc-500 dark:text-zinc-400"
               aria-label="Filtering by"
             >
               Filtering by:{' '}
@@ -101,7 +101,7 @@ export default function Notes() {
               filters.author.split(',').map((author: string, index: number) => (
                 <button
                   key={index}
-                  className="flex items-center justify-start bg-zinc-100 dark:bg-zinc-900 rounded-md px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                  className="flex items-center justify-start rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
                   onClick={() => handleRemoveFilter('author', author)}
                 >
                   <span className="text-sm">
@@ -109,7 +109,7 @@ export default function Notes() {
                   </span>
                   <span className="sr-only">Remove filter</span>
 
-                  <X className="h-4 w-4 ml-1" />
+                  <X className="ml-1 h-4 w-4" />
                 </button>
               ))}
 
@@ -119,13 +119,13 @@ export default function Notes() {
                 .map((category: string, index: number) => (
                   <button
                     key={index}
-                    className="flex items-center justify-start bg-zinc-100 dark:bg-zinc-900 rounded-md px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                    className="flex items-center justify-start rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
                     onClick={() => handleRemoveFilter('category', category)}
                   >
                     <span className="text-sm">{category}</span>
                     <span className="sr-only">Remove filter</span>
 
-                    <X className="h-4 w-4 ml-1" />
+                    <X className="ml-1 h-4 w-4" />
                   </button>
                 ))}
           </section>
