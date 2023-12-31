@@ -1,8 +1,9 @@
 'use client';
 
 import { TechWikiLogo } from '@/components/logo';
+import { useTheme } from '@/hooks/useTheme';
 
-import { GithubIcon } from 'lucide-react';
+import { GithubIcon, Moon, Sun } from 'lucide-react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,7 +13,11 @@ import { Fragment, useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
 
 export default function AuthPage() {
+  const { theme, oppositeTheme, toggleTheme } = useTheme();
+
   const [notes, setNotes] = useState([]);
+
+  const handleToggleTheme = () => toggleTheme();
 
   useEffect(() => {
     try {
@@ -35,10 +40,12 @@ export default function AuthPage() {
     <main className="mx-auto flex h-screen min-h-screen w-full max-w-screen-full-hd flex-col items-start justify-start">
       <div className="grid h-full w-full max-w-screen-full-hd grid-cols-1 overflow-hidden lg:grid-cols-[40fr,60fr]">
         <section className="flex flex-1 flex-col items-center justify-center gap-4 border-zinc-200 p-4 sm:p-8 lg:border-r dark:border-zinc-900">
-          <div className="flex h-full w-full max-w-md flex-col items-center justify-center gap-4 text-center">
-            <TechWikiLogo />
+          <div className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+            <header className="z-50 mx-auto flex w-full items-center justify-center overflow-hidden">
+              <TechWikiLogo />
+            </header>
 
-            <section className="my-auto flex w-full flex-col items-center justify-center gap-4">
+            <section className="my-auto flex w-full max-w-md flex-col items-center justify-center gap-4">
               <h1 className="flex flex-col items-center justify-center gap-2 text-balance text-2xl font-semibold tracking-title text-zinc-900 sm:flex-row sm:text-4xl dark:text-zinc-100">
                 Ready to learn something new today?
               </h1>
@@ -55,27 +62,42 @@ export default function AuthPage() {
               </button>
             </section>
 
-            <span className="text-sm text-zinc-500 dark:text-zinc-400">
-              By continuing, you agree to our{' '}
-              <Link
-                href="/terms"
-                className="text-zinc-500 underline dark:text-zinc-400"
+            <footer className="flex w-full flex-col-reverse items-center justify-center gap-4 lg:flex-row lg:justify-between">
+              <span className="w-full max-w-md text-sm text-zinc-500 lg:text-left dark:text-zinc-400">
+                By continuing, you agree to our{' '}
+                <Link
+                  href="/terms"
+                  className="text-zinc-500 underline dark:text-zinc-400"
+                >
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link
+                  href="/privacy"
+                  className="text-zinc-500 underline dark:text-zinc-400"
+                >
+                  Privacy Policy
+                </Link>
+                . TechWiki is not affiliated with GitHub.
+              </span>
+
+              <button
+                type="button"
+                title={`Toggle to ${oppositeTheme} mode`}
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+                onClick={handleToggleTheme}
               >
-                Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link
-                href="/privacy"
-                className="text-zinc-500 underline dark:text-zinc-400"
-              >
-                Privacy Policy
-              </Link>
-              . TechWiki is not affiliated with GitHub.
-            </span>
+                {theme === 'dark' ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+            </footer>
           </div>
         </section>
 
-        <section className="relative hidden h-full flex-1 flex-col items-center justify-center gap-4 overflow-hidden p-8 lg:flex">
+        <section className="relative hidden h-screen flex-1 flex-col items-center justify-center gap-4 overflow-hidden p-8 lg:flex">
           <MasonryLayout notes={notes} />
         </section>
       </div>
@@ -99,7 +121,7 @@ const MasonryLayout = ({ notes }: any) => (
         1280: 3,
         1024: 2,
       }}
-      className="group absolute right-0 flex w-full flex-1 skew-x-[-5deg] gap-4 lg:scale-110"
+      className="group absolute right-0 flex w-full flex-1 skew-x-[-5deg] gap-4 overflow-hidden lg:scale-110"
       columnClassName="flex flex-col gap-4 h-fit"
       style={{
         margin: 'auto',
@@ -143,6 +165,8 @@ const MasonryLayout = ({ notes }: any) => (
 
           return (
             <Link
+              tabIndex={-1}
+              onFocus={(e) => e.preventDefault()}
               key={i}
               href={`/notes/${slug}`}
               className="flex h-fit cursor-pointer items-start rounded-md border border-zinc-200 bg-zinc-100 p-4 shadow-zinc-50 transition-all hover:-translate-x-1 hover:translate-y-1 hover:scale-[1.025] hover:shadow-xl dark:border-zinc-900 dark:bg-zinc-950 dark:shadow-zinc-950"
@@ -181,6 +205,8 @@ const MasonryLayout = ({ notes }: any) => (
                       authors.map((author: string, index: number) => (
                         <Fragment key={index}>
                           <Link
+                            tabIndex={-1}
+                            onFocus={(e) => e.preventDefault()}
                             className="flex items-center justify-start hover:underline"
                             href={`/notes?author=${author}`}
                           >
