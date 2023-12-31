@@ -6,7 +6,10 @@ import { notes as notesEnv } from 'app/config/env';
 
 import { getNote } from '@/lib/notes';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const author: string | null = searchParams.get('author' || '');
+
   try {
     const res = await fetch(wikiUrl, {
       mode: 'no-cors',
@@ -38,11 +41,23 @@ export async function GET() {
       }),
     );
 
-    const sortedNotes = notes.sort((a: any, b: any) => {
-      const aDate = new Date(a.date);
-      const bDate = new Date(b.date);
-      return bDate.getTime() - aDate.getTime();
-    });
+    let sortedNotes = [];
+
+    if (!author) {
+      sortedNotes = notes.sort((a: any, b: any) => {
+        const aDate = new Date(a.date);
+        const bDate = new Date(b.date);
+        return bDate.getTime() - aDate.getTime();
+      });
+    } else {
+      sortedNotes = notes
+        .filter((note: any) => note.authors.includes(author))
+        .sort((a: any, b: any) => {
+          const aDate = new Date(a.date);
+          const bDate = new Date(b.date);
+          return bDate.getTime() - aDate.getTime();
+        });
+    }
 
     return NextResponse.json({ data: sortedNotes }, { status: 200 });
   } catch (error) {
