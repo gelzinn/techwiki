@@ -9,21 +9,34 @@ const tailwindConfig = {
   ],
   theme: {
     extend: {
+      gridTemplateRows: {
+        'masonry': 'repeat(auto-fill, minmax(300px, 1fr))',
+      },
       screens: {
         'hd': '1280px',
         'full-hd': '1920px',
       },
       animation: {
         'skew-scroll': 'skew-scroll 20s ease-in-out infinite',
+        'skew-scroll-reverse': 'skew-scroll-reverse 20s ease-in-out infinite',
       },
       keyframes: {
         'skew-scroll': {
           '0%, 100%': {
-            transform: 'rotateX(20deg) rotateZ(-20deg) skewX(20deg) translateZ(0) translateY(-100%)',
+            transform: 'translateZ(0) translateY(-100%) skewX(5deg) rotateX(-5deg) rotateZ(-5deg)',
           },
           '50%': {
             transform:
-              'rotateX(20deg) rotateZ(-20deg) skewX(20deg) translateZ(0) translateY(-350%)',
+              'translateZ(0) translateY(-350%) skewX(5deg) rotateX(-5deg) rotateZ(-5deg)',
+          },
+        },
+        'skew-scroll-reverse': {
+          '0%, 100%': {
+            transform: 'translateZ(0) translateY(100%)',
+          },
+          '50%': {
+            transform:
+              'translateZ(0) translateY(350%)',
           },
         },
       },
