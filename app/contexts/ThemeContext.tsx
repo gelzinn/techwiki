@@ -53,7 +53,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
       return newTheme;
     },
-    [theme],
+    [theme, key],
   );
 
   useLayoutEffect(() => {
@@ -82,7 +82,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       return;
 
     html.classList.add(theme);
-  }, [theme, toggleTheme]);
+  }, [theme, toggleTheme, key]);
 
   return (
     <ThemeContext.Provider

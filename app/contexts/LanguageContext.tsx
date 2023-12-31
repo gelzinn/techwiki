@@ -29,7 +29,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     if (typeof window === 'undefined') return;
 
     setLanguageToLocalStorage(language);
-  }, [language]);
+  }, [language, setLanguageToLocalStorage]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -59,7 +59,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
     window.addEventListener('storage', setUILanguage);
     return () => window.removeEventListener('storage', setUILanguage);
-  }, []);
+  }, [key]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
