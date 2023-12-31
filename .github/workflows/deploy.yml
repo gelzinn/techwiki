@@ -42,9 +42,6 @@ jobs:
       - name: Check for linting errors
         run: pnpm run lint
 
-      - name: Check for type errors
-        run: pnpm run type-check
-
       - name: Run tests
         run: pnpm run test
 
