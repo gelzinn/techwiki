@@ -1,8 +1,8 @@
 export const seo = {
   title: {
     default: 'TechWiki',
-    separator: '—',
-    template: '%s | TechWiki',
+    separator: '-',
+    template: '%s',
   },
   description: 'The open source encyclopedia for all tech-related topics.',
   url: 'https://wiki.gelzin.com/',

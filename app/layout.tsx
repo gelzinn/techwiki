@@ -1,13 +1,14 @@
 import { Ubuntu } from 'next/font/google';
 
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { LanguageProvider } from '@/contexts/LanguageContext';
+import { ReactNode } from 'react';
+
+import { LayoutComponents } from './components';
 
 import { seo } from '@/config/seo';
 import { theme } from '@/config/theme';
 
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 import '../styles/globals.css';
 
@@ -28,7 +29,7 @@ const font = Ubuntu({
   weight: ['400', '500', '700'],
 });
 
-export default function RootLayout({ children }: any) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <LanguageProvider>
       <ThemeProvider>
@@ -46,11 +47,7 @@ export default function RootLayout({ children }: any) {
           </head>
 
           <body className="relative h-auto min-h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
-            <Header />
-
-            {children}
-
-            <Footer />
+            <LayoutComponents>{children}</LayoutComponents>
           </body>
         </html>
       </ThemeProvider>
