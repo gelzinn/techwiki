@@ -1,11 +1,11 @@
 'use client';
 
-import { supportedLanguages, defaultLanguage } from '@/config/language';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
-const default_language = defaultLanguage;
+import { supportedLanguages, defaultLanguage } from '@/config/language';
+import { storage } from '@/config/storage';
 
-const localKey = '@techwiki/language';
+const default_language = defaultLanguage;
 
 type TLanguage = (typeof supportedLanguages)[number];
 
@@ -19,8 +19,10 @@ export const LanguageContext = createContext({} as LanguageContextType);
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<TLanguage>(default_language);
 
+  const key = storage.keys.language;
+
   const setLanguageToLocalStorage = (selected_language: TLanguage) => {
-    localStorage.setItem(localKey, JSON.stringify(selected_language));
+    localStorage.setItem(key, JSON.stringify(selected_language));
   };
 
   useEffect(() => {
@@ -33,9 +35,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     if (typeof window === 'undefined') return;
 
     const setUILanguage = () => {
-      const localLanguage = JSON.parse(
-        localStorage.getItem(localKey) || 'null',
-      );
+      const localLanguage = JSON.parse(localStorage.getItem(key) || 'null');
 
       if (
         localLanguage &&

@@ -7,7 +7,9 @@ import {
   useLayoutEffect,
   useState,
 } from 'react';
+
 import { theme as themeConfig } from '@/config/theme';
+import { storage } from '@/config/storage';
 
 const defaultTheme = themeConfig.defaultTheme as ThemeType;
 
@@ -32,6 +34,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     defaultTheme === 'dark' ? 'light' : 'dark',
   );
 
+  const key = storage.keys.theme;
+
   const toggleTheme = useCallback(
     (t?: ThemeType) => {
       if (typeof window === 'undefined') return defaultTheme;
@@ -44,7 +48,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       setTheme(newTheme);
       setOppositeTheme(oldTheme);
 
-      localStorage.setItem('theme', newTheme);
+      localStorage.setItem(key, newTheme);
       html.classList.replace(oldTheme, newTheme);
 
       return newTheme;
@@ -56,7 +60,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     if (typeof window === 'undefined') return;
 
     const html = document.documentElement;
-    const localTheme = localStorage.getItem('theme') as ThemeType;
+    const localTheme = localStorage.getItem(key) as ThemeType;
 
     if (localTheme) {
       setTheme(localTheme);
@@ -69,7 +73,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       setTheme(osTheme);
       setOppositeTheme(osTheme === 'dark' ? 'light' : 'dark');
 
-      localStorage.setItem('theme', osTheme);
+      localStorage.setItem(key, osTheme);
 
       toggleTheme(osTheme);
     }
