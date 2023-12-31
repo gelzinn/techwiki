@@ -8,7 +8,7 @@ import { preventComponents } from '@/config';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
-export const LayoutComponents = ({ children }: { children: ReactNode }) => {
+export const ComponentsLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
 
   return (
