@@ -38,7 +38,13 @@ export async function GET() {
       }),
     );
 
-    return NextResponse.json({ data: notes }, { status: 200 });
+    const sortedNotes = notes.sort((a: any, b: any) => {
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      return bDate.getTime() - aDate.getTime();
+    });
+
+    return NextResponse.json({ data: sortedNotes }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
