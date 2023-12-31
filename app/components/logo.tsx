@@ -29,9 +29,11 @@ export const TechWikiLogo = ({
 
   return (
     <h1
-      className={`pointer-events-none h-auto select-none ${className || ''} ${
-        inter.className
-      }`}
+      className={`${
+        isLink
+          ? 'pointer-events-none select-none'
+          : 'pointer-events-auto select-auto'
+      } h-auto ${className || ''} ${inter.className}`}
       aria-label="TechWiki"
     >
       {isLink ? (
