@@ -17,27 +17,27 @@ export default function Notes() {
   const router = useRouter();
   const search = useSearchParams();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [fetchedPosts, setFetchedPosts] = useState<IPost[]>([]);
 
   const [posts, setPosts] = useState<IPost[]>([]);
   const [filters, setFilters] = useState<any>({});
 
   const handleRemoveFilter = (filter: string, value: string) => {
-    setFilters((prevFilters: any) => {
-      const newFilters = { ...prevFilters };
+    const newFilters = { ...filters };
 
-      if (newFilters[filter]) {
-        const newFilter = newFilters[filter]
-          .split(',')
-          .filter((f: string) => f !== value)
-          .join(',');
+    if (newFilters[filter]) {
+      const newFilter = newFilters[filter]
+        .split(',')
+        .filter((f: string) => f !== value)
+        .join(',');
 
-        if (newFilter) newFilters[filter] = newFilter;
-        else delete newFilters[filter];
-      }
+      if (newFilter) newFilters[filter] = newFilter;
+      else delete newFilters[filter];
+    }
 
-      return newFilters;
-    });
+    setFilters(newFilters);
 
     const newQuery = new URLSearchParams(search.toString());
 
@@ -56,20 +56,60 @@ export default function Notes() {
   };
 
   useEffect(() => {
-    setFilters({
-      author: search.get('author') || '',
-      category: search.get('category') || '',
+    const author = search.get('author') || '';
+    const category = search.get('category') || '';
+
+    if (!author && !category) return setPosts(fetchedPosts);
+  }, [filters]);
+
+  useEffect(() => {
+    const author = search.get('author') || '';
+    const category = search.get('category') || '';
+
+    setFilters((prevFilters: any) => ({
+      ...prevFilters,
+      author,
+      category,
+    }));
+
+    const authors = author.split(',') || [];
+    const categories = category.split(',') || [];
+
+    if (fetchedPosts.length === 0) return;
+
+    const filteredPosts = fetchedPosts.filter((post: IPost) => {
+      if (authors && authors.length > 0) {
+        const postAuthors = post.authors || [];
+
+        for (const author of authors) {
+          if (postAuthors.includes(author)) return true;
+        }
+      }
+
+      if (categories && categories.length > 0) {
+        const postCategories = post.categories || [];
+
+        for (const category of categories) {
+          if (postCategories.includes(category)) return true;
+        }
+      }
+
+      return false;
     });
 
-    const getNotesData = async () => {
-      try {
-        setLoading(true);
+    setPosts(filteredPosts);
+  }, [search]);
 
-        const res = await fetch(`/api/notes?${search.toString()}`);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+
+      try {
+        const res = await fetch('/api/notes');
         const { data } = await res.json();
 
-        if (data) setPosts(data);
-        else setPosts([]);
+        setPosts(data);
+        setFetchedPosts(data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -77,8 +117,8 @@ export default function Notes() {
       }
     };
 
-    getNotesData();
-  }, [search]);
+    fetchPosts();
+  }, []);
 
   return (
     <main className="mx-auto flex h-auto min-h-screen w-full max-w-screen-full-hd flex-col items-start justify-start p-4 py-8">
