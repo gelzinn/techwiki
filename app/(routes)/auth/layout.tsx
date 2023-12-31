@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import { seo } from '@/config/seo';
 
 export const metadata = {
@@ -9,6 +7,6 @@ export const metadata = {
   },
 };
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+export default function AuthLayout({ children }: any) {
   return children;
 }

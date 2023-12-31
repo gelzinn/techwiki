@@ -1,8 +1,6 @@
 import { Ubuntu } from 'next/font/google';
 
-import { ReactNode } from 'react';
-
-import { LayoutComponents } from './components';
+import { ComponentsLayout as Components } from './components';
 
 import { seo } from '@/config/seo';
 import { theme } from '@/config/theme';
@@ -29,7 +27,7 @@ const font = Ubuntu({
   weight: ['400', '500', '700'],
 });
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: any) {
   return (
     <LanguageProvider>
       <ThemeProvider>
@@ -47,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </head>
 
           <body className="relative h-auto min-h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
-            <LayoutComponents>{children}</LayoutComponents>
+            <Components>{children}</Components>
           </body>
         </html>
       </ThemeProvider>
