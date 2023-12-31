@@ -42,10 +42,10 @@ jobs:
       - name: Check for linting errors
         run: pnpm run lint
 
-      - name: Run tests
+      - name: Check for errors in tests
         run: pnpm run test
 
-      - name: Run security audit
+      - name: Check for security vulnerabilities
         run: pnpm audit
 
   deploy:
