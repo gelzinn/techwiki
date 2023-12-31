@@ -12,6 +12,13 @@ const tailwindConfig = {
       gridTemplateRows: {
         'masonry': 'repeat(auto-fill, minmax(300px, 1fr))',
       },
+      textWrap: {
+        'balance': 'balance',
+        'pretty': 'pretty',
+      },
+      letterSpacing: {
+        'title': 'clamp(-2px,calc(-1px - .1vw),-.96px)',
+      },
       screens: {
         'hd': '1280px',
         'full-hd': '1920px',
