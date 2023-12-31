@@ -360,19 +360,35 @@ export default function Notes() {
           </ul>
         </>
       ) : (
-        <div
-          className="flex h-full w-full flex-col items-center justify-center gap-4"
-          aria-label="Loading notes"
-        >
-          <Loading />
-
-          <span
-            className="text-sm text-zinc-500 dark:text-zinc-400"
+        <>
+          <div
+            className="mb-8 flex w-full h-16 items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900 animate-pulse pointer-events-none select-none"
             aria-label="Loading notes"
           >
-            Loading notes...
-          </span>
-        </div>
+            <div className="min-h-10 h-10 min-w-10 w-10 rounded-md bg-zinc-100 dark:bg-zinc-900" />
+            <div className="min-h-10 h-10 w-full max-w-md rounded-md bg-zinc-100 dark:bg-zinc-900" />
+          </div>
+
+          <div
+            aria-label="Loading filters"
+            className="mb-8 flex w-full h-screen items-start justify-start gap-2 overflow-hidden animate-pulse pointer-events-none select-none"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to top, transparent, black)',
+            }}
+          >
+            <ul
+              className="grid w-full grid-cols-1 gap-4 divide-y divide-zinc-200 sm:grid-cols-2 sm:divide-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 dark:divide-zinc-900"
+              aria-label="Loading notes"
+            >
+              {Array.from({ length: 30 }).map((_, index: number) => (
+                <li
+                  key={index}
+                  className="flex w-full min-h-48 h-fit aspect-video flex-col items-start justify-start overflow-hidden pb-4 pt-8 first-of-type:pt-0 sm:py-0 bg-zinc-100 dark:bg-zinc-900 rounded-md"
+                />
+              ))}
+            </ul>
+          </div>
+        </>
       )}
     </main>
   );
