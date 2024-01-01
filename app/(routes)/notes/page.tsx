@@ -11,8 +11,6 @@ import Image from 'next/image';
 import { IPost } from '@/@types/post';
 import { formatTimeDifference } from '@/lib/formatters/timeDifference';
 
-import { Loading } from '@/components/loading';
-
 export default function Notes() {
   const router = useRouter();
   const search = useSearchParams();
