@@ -1,45 +1,114 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { useTheme } from '@/hooks/useTheme';
 
-import { Menu, Moon, PanelRightClose, Sun } from 'lucide-react';
 import { TechWikiLogo } from './logo';
+import { Loading } from './loading';
+import { Icon } from './icon';
 
 export const Header = () => {
   const { theme, oppositeTheme, toggleTheme } = useTheme();
 
+  const [search, setSearch] = useState('');
+  const [searching, setSearching] = useState(false);
+
   const handleToggleTheme = () => toggleTheme();
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    if (!search || searching || search.length < 1) return;
+
+    const randomTime = Math.floor(Math.random() * 3000) + 1000;
+
+    const timer = setTimeout(async () => {
+      try {
+        setSearching(true);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setTimeout(() => {
+          setSearching(false);
+        }, randomTime);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   return (
     <header className="sticky top-0 z-50 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50">
-      <nav className="relative flex h-16 w-full max-w-screen-full-hd flex-row-reverse items-center justify-between p-4 lg:flex-row">
-        <button
-          type="button"
-          title="Toggle navigation menu"
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
-        >
-          <span className="sr-only">Toggle navigation menu</span>
+      <nav className="relative flex h-16 w-full max-w-screen-full-hd items-center justify-between p-4">
+        <TechWikiLogo className="text-xl" isLink />
 
-          <PanelRightClose
-            className="hidden h-4 w-4 -rotate-180 lg:block"
-            aria-hidden="true"
+        <label
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden   lg:flex h-10 min-w-32 w-full max-w-xl items-center justify-start rounded-full border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-950 overflow-hidden text-zinc-400 dark:text-zinc-600"
+          htmlFor="search"
+        >
+          <div
+            className={`flex items-center justify-center w-10 h-10 ml-1 ${
+              searching ? 'h-10 w-0 opacity-0 mr-4' : 'opacity-100'
+            } transition-all duration-300`}
+          >
+            <Icon name="Search" className={`h-4 w-4`} strokeWidth={1.5} />
+          </div>
+
+          <input
+            type="text"
+            placeholder="What are you looking for?"
+            id="search"
+            name="search"
+            className="flex h-full w-full items-center justify-center bg-transparent text-sm focus:outline-none focus:border-zinc-300 dark:focus:border-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 outline-none text-zinc-600 placeholder:text-zinc-400 dark:text-zinc-400 dark:placeholder:text-zinc-600"
+            autoComplete="off"
+            value={search}
+            onChange={handleSearch}
+            disabled={searching}
           />
 
-          <Menu className="block h-4 w-4 lg:hidden" aria-hidden="true" />
-        </button>
+          <div
+            className={`w-10 h-10 mr-1 border-gray-950 dark:border-gray-50 ${
+              !searching ? 'hidden h-10 w-0 opacity-0 mr-4' : 'opacity-100'
+            } transition-all duration-300 bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center`}
+          >
+            <Loading
+              className={`w-4 h-4
+              ${searching ? 'opacity-100' : 'opacity-0'}
+            `}
+            />
+          </div>
 
-        <TechWikiLogo className="text-xl" isLink />
+          <button
+            className={` flex items-center justify-center w-10 h-10 mr-1 ${
+              search && !searching
+                ? 'h-10 w-10 opacity-100'
+                : 'hidden opacity-0'
+            } transition-all duration-300`}
+            onClick={() => setSearch('')}
+          >
+            <Icon
+              name="X"
+              className={`h-4 w-4 ${
+                search && !searching ? 'opacity-100' : 'opacity-0'
+              }`}
+              strokeWidth={1.5}
+            />
+          </button>
+        </label>
 
         <button
           type="button"
           title={`Toggle to ${oppositeTheme} mode`}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+          className="flex h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
           onClick={handleToggleTheme}
         >
           {theme === 'dark' ? (
-            <Sun className="h-4 w-4" />
+            <Icon name="Sun" className="h-4 w-4" />
           ) : (
-            <Moon className="h-4 w-4" />
+            <Icon name="Moon" className="h-4 w-4" />
           )}
         </button>
       </nav>
