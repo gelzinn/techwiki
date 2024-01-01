@@ -218,7 +218,7 @@ export default function Notes() {
                             <Image
                               src={thumbnail}
                               alt={title}
-                              className="pointer-events-none aspect-video w-full select-none bg-zinc-100 dark:bg-zinc-900 transition-all duration-500 ease-in-out blur-xl"
+                              className="pointer-events-none aspect-video w-full select-none bg-zinc-100 blur-xl transition-all duration-500 ease-in-out dark:bg-zinc-900"
                               style={{ objectFit: 'cover' }}
                               width={640}
                               height={360}
