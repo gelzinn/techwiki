@@ -46,12 +46,12 @@ export const Header = () => {
         <TechWikiLogo className="text-xl" isLink />
 
         <label
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden   lg:flex h-10 min-w-32 w-full max-w-xl items-center justify-start rounded-full border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-950 overflow-hidden text-zinc-400 dark:text-zinc-600"
+          className="absolute left-1/2 top-1/2 hidden h-10 w-full min-w-32   max-w-xl -translate-x-1/2 -translate-y-1/2 items-center justify-start overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-400 lg:flex dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-600"
           htmlFor="search"
         >
           <div
-            className={`flex items-center justify-center w-10 h-10 ml-1 ${
-              searching ? 'h-10 w-0 opacity-0 mr-4' : 'opacity-100'
+            className={`ml-1 flex h-10 w-10 items-center justify-center ${
+              searching ? 'mr-4 h-10 w-0 opacity-0' : 'opacity-100'
             } transition-all duration-300`}
           >
             <Icon name="Search" className={`h-4 w-4`} strokeWidth={1.5} />
@@ -62,7 +62,7 @@ export const Header = () => {
             placeholder="What are you looking for?"
             id="search"
             name="search"
-            className="flex h-full w-full items-center justify-center bg-transparent text-sm focus:outline-none focus:border-zinc-300 dark:focus:border-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 outline-none text-zinc-600 placeholder:text-zinc-400 dark:text-zinc-400 dark:placeholder:text-zinc-600"
+            className="flex h-full w-full items-center justify-center bg-transparent text-sm text-zinc-600 outline-none transition-all duration-300 placeholder:text-zinc-400 focus:border-zinc-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:text-zinc-400 dark:placeholder:text-zinc-600 dark:focus:border-zinc-800"
             autoComplete="off"
             value={search}
             onChange={handleSearch}
@@ -70,19 +70,19 @@ export const Header = () => {
           />
 
           <div
-            className={`w-10 h-10 mr-1 border-gray-950 dark:border-gray-50 ${
-              !searching ? 'hidden h-10 w-0 opacity-0 mr-4' : 'opacity-100'
-            } transition-all duration-300 bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center`}
+            className={`mr-1 h-10 w-10 border-gray-950 dark:border-gray-50 ${
+              !searching ? 'mr-4 hidden h-10 w-0 opacity-0' : 'opacity-100'
+            } flex items-center justify-center bg-zinc-100 transition-all duration-300 dark:bg-zinc-950`}
           >
             <Loading
-              className={`w-4 h-4
+              className={`h-4 w-4
               ${searching ? 'opacity-100' : 'opacity-0'}
             `}
             />
           </div>
 
           <button
-            className={` flex items-center justify-center w-10 h-10 mr-1 ${
+            className={` mr-1 flex h-10 w-10 items-center justify-center ${
               search && !searching
                 ? 'h-10 w-10 opacity-100'
                 : 'hidden opacity-0'
