@@ -1,6 +1,12 @@
 'use client';
 
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 
 import { supportedLanguages, defaultLanguage } from '@/config/language';
 import { storage } from '@/config/storage';
@@ -21,15 +27,21 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const key = storage.keys.language;
 
-  const setLanguageToLocalStorage = (selected_language: TLanguage) => {
-    localStorage.setItem(key, JSON.stringify(selected_language));
-  };
+  const setLanguageToLocalStorage = useCallback(
+    (selected_language: TLanguage) => {
+      localStorage.setItem(key, JSON.stringify(selected_language));
+    },
+    [key],
+  );
 
-  useEffect(() => {
+  const handleChangeLanguage = useCallback(() => {
     if (typeof window === 'undefined') return;
-
     setLanguageToLocalStorage(language);
   }, [language, setLanguageToLocalStorage]);
+
+  useEffect(() => {
+    handleChangeLanguage();
+  }, [handleChangeLanguage]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
