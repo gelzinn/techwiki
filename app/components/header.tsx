@@ -6,7 +6,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 import { TechWikiLogo } from './logo';
 import { Loading } from './loading';
-import { Icon } from './icon';
+import Icon from './icon';
 
 export const Header = () => {
   const { theme, oppositeTheme, toggleTheme } = useTheme();

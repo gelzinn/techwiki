@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 
 import { TechWikiLogo } from '@/components/logo';
-import { Icon } from '@/components/icon';
+import Icon from '@/components/icon';
 
 import { cards } from '@/config/home/cards';
 

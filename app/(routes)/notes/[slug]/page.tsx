@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { Fragment } from 'react';
 
-import { Icon } from '@/components/icon';
+import Icon from '@/components/icon';
 
 import { getNote } from '@/lib/notes';
 import MDX from '@/components/mdx';

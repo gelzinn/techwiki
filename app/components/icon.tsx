@@ -9,12 +9,7 @@ interface IconProps {
   className?: string;
 }
 
-export const Icon = ({
-  name,
-  size = 16,
-  strokeWidth,
-  className,
-}: IconProps) => {
+const Icon = ({ name, size = 16, strokeWidth, className }: IconProps) => {
   if (!name) return null;
 
   const exists = Object.keys(LucideIcons).some((key) => {
@@ -37,3 +32,5 @@ export const Icon = ({
     />
   );
 };
+
+export default Icon;
