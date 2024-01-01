@@ -3,10 +3,10 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
+import { Icon } from '@/components/icon';
+
 import Link from 'next/link';
 import Image from 'next/image';
-
-import { ArrowRight, ChevronLeft, X } from 'lucide-react';
 
 import { IPost } from '@/@types/post';
 import { formatTimeDifference } from '@/lib/formatters/timeDifference';
@@ -130,7 +130,7 @@ export default function Notes() {
               className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
             >
               <span className="sr-only">Home</span>
-              <ChevronLeft className="h-4 w-4" />
+              <Icon name="ChevronLeft" className="h-4 w-4" />
             </Link>
             <span className="text-xl sm:text-3xl">All notes</span>
           </h1>
@@ -163,7 +163,7 @@ export default function Notes() {
                         </span>
                         <span className="sr-only">Remove filter</span>
 
-                        <X className="ml-1 h-4 w-4" />
+                        <Icon name="X" className="ml-1 h-4 w-4" />
                       </button>
                     ))}
 
@@ -179,7 +179,7 @@ export default function Notes() {
                         <span className="text-sm">category: {category}</span>
                         <span className="sr-only">Remove filter</span>
 
-                        <X className="ml-1 h-4 w-4" />
+                        <Icon name="X" className="ml-1 h-4 w-4" />
                       </button>
                     ))}
               </section>
@@ -326,7 +326,8 @@ export default function Notes() {
                           href={`/notes/${slug}`}
                           className="group flex items-center justify-start gap-1.5 text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
                         >
-                          Read more <ArrowRight className="h-4 w-4" />
+                          Read more{' '}
+                          <Icon name="ArrowRight" className="h-4 w-4" />
                         </Link>
 
                         <span

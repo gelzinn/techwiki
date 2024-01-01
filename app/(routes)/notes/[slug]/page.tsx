@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { ChevronLeft } from 'lucide-react';
 import { Fragment } from 'react';
+
+import { Icon } from '@/components/icon';
 
 import { getNote } from '@/lib/notes';
 import MDX from '@/components/mdx';
@@ -28,7 +29,7 @@ export default async function NotePage({
           className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
         >
           <span className="sr-only">Home</span>
-          <ChevronLeft className="h-4 w-4" />
+          <Icon name="ChevronLeft" className="h-4 w-4" />
         </Link>
 
         <section

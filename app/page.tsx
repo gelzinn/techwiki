@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 
-import { ChevronRight } from 'lucide-react';
-
 import { TechWikiLogo } from '@/components/logo';
+import { Icon } from '@/components/icon';
+
 import { cards } from '@/config/home/cards';
 
 export default function Homepage() {
@@ -109,7 +109,10 @@ export default function Homepage() {
                       </p>
                     </div>
 
-                    <ChevronRight className="hidden h-6 w-6 text-zinc-500 transition-opacity duration-200 group-hover:opacity-0 sm:block dark:text-zinc-400" />
+                    <Icon
+                      name="ChevronRight"
+                      className="hidden h-6 w-6 text-zinc-500 transition-opacity duration-200 group-hover:opacity-0 sm:block dark:text-zinc-400"
+                    />
                   </a>
                 );
               })}

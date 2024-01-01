@@ -1,9 +1,9 @@
 'use client';
 
+import { Icon } from '@/components/icon';
 import { TechWikiLogo } from '@/components/logo';
-import { useTheme } from '@/hooks/useTheme';
 
-import { GithubIcon, Moon, Sun } from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -55,7 +55,7 @@ export default function AuthPage() {
               </p>
 
               <button className="mt-4 flex w-full items-center justify-center gap-4 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-3 transition-all hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900">
-                <GithubIcon size={20} />
+                <Icon name="GithubIcon" size={20} />
                 <span className="text-zinc-500 dark:text-zinc-400">
                   Sign in with GitHub
                 </span>
@@ -88,9 +88,9 @@ export default function AuthPage() {
                 onClick={handleToggleTheme}
               >
                 {theme === 'dark' ? (
-                  <Sun className="h-4 w-4" />
+                  <Icon name="Sun" className="h-4 w-4" />
                 ) : (
-                  <Moon className="h-4 w-4" />
+                  <Icon name="Moon" className="h-4 w-4" />
                 )}
               </button>
             </footer>
