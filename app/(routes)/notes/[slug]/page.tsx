@@ -4,9 +4,22 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 
 import { Icon } from '@/components/icon';
+import MDX from '@/components/mdx';
 
 import { getNote } from '@/lib/notes';
-import MDX from '@/components/mdx';
+import { seo } from '@/config/seo';
+
+export async function generateMetadata({ params }: { params: any }) {
+  const { slug } = params;
+
+  const { meta }: any = await getNote(slug);
+  const { title, description } = meta;
+
+  return {
+    title: `${title} ${seo.title.separator} ${seo.title.default}`,
+    description,
+  };
+}
 
 export default async function NotePage({
   params,
@@ -67,15 +80,14 @@ export default async function NotePage({
         {thumbnail && (
           <picture className="mx-auto mb-8 aspect-video w-full select-none overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-900">
             <Image
+              priority
               src={thumbnail}
               alt={title}
-              className="pointer-events-none aspect-video w-full max-w-3xl select-none"
+              className="pointer-events-none aspect-video w-full max-w-3xl select-none transition-all duration-500 ease-in-out"
               style={{ objectFit: 'cover' }}
               width={640}
               height={360}
               quality={100}
-              priority
-              loading="eager"
               about={`Thumbnail of ${title}`}
             />
           </picture>
