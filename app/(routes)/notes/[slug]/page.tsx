@@ -1,7 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
-
 import { Fragment } from 'react';
+import { Link, Image } from '@/infra/next/app';
 
 import { Icon } from '@/components/icon';
 import MDX from '@/components/mdx';

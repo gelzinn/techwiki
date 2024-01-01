@@ -3,8 +3,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
-import Link from 'next/link';
-import Image from 'next/image';
+import { Link, Image } from '@/infra/next/app';
 
 import { Icon } from '@/components/icon';
 

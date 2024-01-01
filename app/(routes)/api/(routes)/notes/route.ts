@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from '@/infra/next/server';
 
 import { repo, wikiPagesUrl as wikiUrl } from 'app/config/content';
 

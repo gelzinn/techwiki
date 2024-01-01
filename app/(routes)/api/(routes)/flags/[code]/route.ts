@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from '@/infra/next/server';
 
 const getCountries = (lang = 'en') => {
   const A = 65;

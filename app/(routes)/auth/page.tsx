@@ -1,14 +1,12 @@
 'use client';
 
+import { Fragment, useEffect, useState } from 'react';
+import { Link, Image } from '@/infra/next/app';
+
 import { Icon } from '@/components/icon';
 import { TechWikiLogo } from '@/components/logo';
 
 import { useTheme } from '@/hooks/useTheme';
-
-import Image from 'next/image';
-import Link from 'next/link';
-
-import { Fragment, useEffect, useState } from 'react';
 
 import Masonry from 'react-masonry-css';
 

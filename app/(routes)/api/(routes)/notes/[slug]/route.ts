@@ -1,5 +1,5 @@
 import { getNote } from '@/lib/notes';
-import { NextResponse } from 'next/server';
+import { NextResponse } from '@/infra/next/server';
 
 export async function GET(
   request: Request,
