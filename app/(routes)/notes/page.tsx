@@ -61,8 +61,12 @@ export default function Notes() {
   }, [search, fetchedPosts, filters]);
 
   useEffect(() => {
+    if (!search) return setPosts(fetchedPosts);
+
     const author = search.get('author') || '';
     const category = search.get('category') || '';
+
+    if (!author && !category) return setPosts(fetchedPosts);
 
     setFilters((prevFilters: any) => ({
       ...prevFilters,
@@ -72,8 +76,6 @@ export default function Notes() {
 
     const authors = author.split(',') || [];
     const categories = category.split(',') || [];
-
-    if (fetchedPosts.length === 0) return;
 
     const filteredPosts = fetchedPosts.filter((post: IPost) => {
       if (authors && authors.length > 0) {
@@ -216,13 +218,20 @@ export default function Notes() {
                             <Image
                               src={thumbnail}
                               alt={title}
-                              className="pointer-events-none aspect-video w-full select-none bg-zinc-100 object-cover dark:bg-zinc-900"
+                              className="pointer-events-none aspect-video w-full select-none bg-zinc-100 dark:bg-zinc-900 transition-all duration-500 ease-in-out blur-xl"
                               style={{ objectFit: 'cover' }}
                               width={640}
                               height={360}
-                              quality={50}
-                              priority
-                              loading="eager"
+                              quality={20}
+                              loading="lazy"
+                              onLoadStart={(e) => {
+                                const image = e.target as HTMLImageElement;
+                                image.classList.add('blur-xl');
+                              }}
+                              onLoad={(e) => {
+                                const image = e.target as HTMLImageElement;
+                                image.classList.remove('blur-xl');
+                              }}
                               about={`Thumbnail of ${title}`}
                             />
                           ) : (
