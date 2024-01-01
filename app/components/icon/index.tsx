@@ -28,6 +28,8 @@ export const Icon = ({
     React.SVGProps<SVGSVGElement>
   >;
 
+  if (!IconComponent) return null;
+
   return (
     <IconComponent
       className={className}
@@ -37,5 +39,3 @@ export const Icon = ({
     />
   );
 };
-
-export default Icon;
