@@ -1,6 +1,6 @@
 'use client';
 
-import Icon from '@/components/icon';
+import { Icon } from '@/components/icon';
 import { TechWikiLogo } from '@/components/logo';
 
 import { useTheme } from '@/hooks/useTheme';

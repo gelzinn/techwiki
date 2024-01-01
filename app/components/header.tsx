@@ -6,7 +6,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 import { TechWikiLogo } from './logo';
 import { Loading } from './loading';
-import Icon from './icon';
+import { Icon } from './icon';
 
 export const Header = () => {
   const { theme, oppositeTheme, toggleTheme } = useTheme();
@@ -38,7 +38,7 @@ export const Header = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [search]);
+  }, [search, searching]);
 
   return (
     <header className="sticky top-0 z-50 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50">
