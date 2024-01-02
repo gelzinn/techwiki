@@ -38,7 +38,7 @@ export const Header = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [search, searching]);
+  }, [search]);
 
   return (
     <header className="sticky top-0 z-50 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50">
@@ -46,12 +46,12 @@ export const Header = () => {
         <TechWikiLogo className="text-xl" isLink />
 
         <label
-          className="absolute left-1/2 top-1/2 hidden h-10 w-full min-w-32   max-w-xl -translate-x-1/2 -translate-y-1/2 items-center justify-start overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-400 lg:flex dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-600"
+          className="absolute left-1/2 top-1/2 hidden h-10 w-full min-w-32 max-w-xl -translate-x-1/2 -translate-y-1/2 items-center justify-start overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-400 lg:flex dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-600"
           htmlFor="search"
         >
           <div
             className={`ml-1 flex h-10 w-10 items-center justify-center ${
-              searching ? 'mr-4 h-10 w-0 opacity-0' : 'opacity-100'
+              searching ? '-ml-4 h-10 w-0 opacity-0' : 'opacity-100'
             } transition-all duration-300`}
           >
             <Icon name="Search" className={`h-4 w-4`} strokeWidth={1.5} />
