@@ -1,4 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-export { Link, Image };
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+
+export { Link, Image, useSearchParams, useRouter, usePathname };
