@@ -212,7 +212,7 @@ const MasonryLayout = ({ notes }: any) => (
                             tabIndex={-1}
                             onFocus={(e) => e.preventDefault()}
                             className="flex items-center justify-start hover:underline"
-                            href={`/notes?author=${author}`}
+                            href={`/explore?author=${author}`}
                           >
                             <Image
                               src={`https://github.com/${author}.png`}

@@ -72,7 +72,7 @@ export default function Notes() {
       else newQuery.delete(filter);
     }
 
-    router.push(`/notes?${newQuery.toString()}`);
+    router.push(`/explore?${newQuery.toString()}`);
   };
 
   const handleToggleView = (newView?: ViewType) => {
@@ -395,7 +395,7 @@ export default function Notes() {
                                 (category: any, index: number) => (
                                   <Link
                                     key={index}
-                                    href={`/notes?category=${category}`}
+                                    href={`/explore?category=${category}`}
                                     className="w-fit text-nowrap rounded-md bg-zinc-200 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 hover:bg-zinc-300 hover:text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
                                   >
                                     {category}
@@ -436,7 +436,7 @@ export default function Notes() {
                                 <Fragment key={index}>
                                   <Link
                                     className="flex items-center justify-start hover:underline"
-                                    href={`/notes?author=${author}`}
+                                    href={`/explore?author=${author}`}
                                   >
                                     <Image
                                       src={`https://github.com/${author}.png`}
