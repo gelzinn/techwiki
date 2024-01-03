@@ -16,6 +16,12 @@
     "lint:fix": "next lint --fix",
     "test": "vitest"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "cat ./config/commit-pattern.md | tee -a $1 && git add $1"
+    }
+  },
   "prettier": {
     "arrowParens": "always",
     "semi": true,
@@ -53,6 +59,7 @@
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-tailwindcss": "^3.13.0",
+    "husky": "8.0.3",
     "jsdom": "23.0.1",
     "postcss": "^8.4.32",
     "prettier": "^2.8.8",
