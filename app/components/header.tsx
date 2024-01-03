@@ -20,26 +20,6 @@ export const Header = () => {
     setSearch(e.target.value);
   };
 
-  useEffect(() => {
-    if (!search || searching || search.length < 1) return;
-
-    const randomTime = Math.floor(Math.random() * 3000) + 1000;
-
-    const timer = setTimeout(async () => {
-      try {
-        setSearching(true);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setTimeout(() => {
-          setSearching(false);
-        }, randomTime);
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [search]);
-
   return (
     <header className="sticky top-0 z-50 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50">
       <nav className="relative flex h-16 w-full max-w-screen-full-hd items-center justify-between p-4">
