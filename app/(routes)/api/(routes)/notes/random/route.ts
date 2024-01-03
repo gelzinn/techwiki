@@ -1,6 +1,8 @@
 import { NextResponse } from '@/infra/next/server';
 
-import { notes as notesEnv, baseUrl } from '@/config/env';
+import { baseUrl } from '@/config/env';
+
+export const revalidate = 0;
 
 export async function GET() {
   try {

@@ -41,6 +41,7 @@ export async function middleware(request: NextRequest) {
 
   if (equals(request, '/explore/random')) {
     const res = await fetch(`${baseUrl}/api/notes/random`, {
+      mode: 'no-cors',
       cache: 'no-cache',
     });
 
