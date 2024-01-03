@@ -6,9 +6,7 @@ export async function GET() {
   try {
     const res = await fetch(`${baseUrl}/api/notes`, {
       mode: 'no-cors',
-      next: {
-        revalidate: notesEnv.revalidate,
-      },
+      cache: 'no-cache',
     });
 
     const { data } = await res.json();
@@ -21,9 +19,6 @@ export async function GET() {
       },
       {
         status: 200,
-        headers: {
-          'cache-control': 'no-cache',
-        },
       },
     );
   } catch (error) {
