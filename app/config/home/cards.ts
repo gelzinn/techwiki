@@ -6,23 +6,23 @@ type TCard = {
 
 export const cards: TCard[] = [
   {
-    title: 'All Notes',
+    title: 'Explore',
     description: 'Browse all TechWiki notes.',
     href: '/explore',
   },
   {
-    title: 'All Topics',
-    description: 'Browse all TechWiki topics.',
-    href: '/topics',
+    title: 'About',
+    description: 'Learn more about TechWiki.',
+    href: '/about',
   },
   {
-    title: 'All Categories',
-    description: 'Browse all TechWiki categories.',
-    href: '/categories',
+    title: 'Contribute',
+    description: 'Contribute to TechWiki.',
+    href: '/contribute',
   },
   {
-    title: 'All Tags',
-    description: 'Browse all TechWiki tags.',
-    href: '/tags',
+    title: 'GitHub',
+    description: 'View the TechWiki GitHub repository.',
+    href: '/github',
   },
 ];
