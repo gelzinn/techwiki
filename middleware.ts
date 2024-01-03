@@ -40,13 +40,13 @@ export async function middleware(request: NextRequest) {
    */
 
   if (equals(request, '/explore/random')) {
-    const res = await fetch(`${baseUrl}/api/notes/random`);
+    const res = await fetch(`${baseUrl}/api/notes/random`, {
+      cache: 'no-cache',
+    });
+
     const { data } = await res.json();
 
-    if (!data || !data.slug) {
-      console.error('Error on getting random note.');
-      return NextResponse.next();
-    }
+    if (!data && !data.slug) return NextResponse.redirect(baseUrl, 302);
 
     return NextResponse.redirect(`${baseUrl}/notes/${data.slug}`);
   }
