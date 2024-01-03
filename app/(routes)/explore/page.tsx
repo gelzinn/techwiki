@@ -16,14 +16,19 @@ import { formatTimeDifference } from '@/lib/formatters/timeDifference';
 import { subnav } from '@/config/header/subnav';
 
 import { IPost } from '@/@types/post';
+import { removeQueryParam } from '@/utils/removeQueryParam';
 
 type ViewType = 'grid' | 'list';
+
+type TabType = (typeof subnav)[number]['tab'];
 
 export default function Notes() {
   const router = useRouter();
   const pathname = usePathname();
 
   const search = useSearchParams();
+
+  const tab = search.get('tab') as TabType;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -32,8 +37,12 @@ export default function Notes() {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [filters, setFilters] = useState<any>({});
 
-  const [selectedView, setSelectedView] = useState<ViewType>('grid');
   const [view, setView] = useState<ViewType>('grid');
+  const [selectedView, setSelectedView] = useState<ViewType>('grid');
+
+  const [selectedTab, setSelectedTab] = useState<TabType | undefined>(
+    undefined,
+  );
 
   const handleRemoveFilter = (filter: string, value: string) => {
     const newFilters = { ...filters };
@@ -133,16 +142,30 @@ export default function Notes() {
 
   useEffect(() => {
     const handleResize = () => {
+      const width = window.innerWidth;
+
       if (selectedView === 'list') {
-        if (window.innerWidth < 1024) setView('grid');
+        if (width < 1024) setView('grid');
         else setView('list');
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    if (typeof window === 'undefined') return;
 
+    window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [window.innerWidth]);
+  }, [selectedView]);
+
+  useEffect(() => {
+    removeQueryParam('tab');
+
+    const defaultTab = subnav.find((item: any) => item.default);
+
+    if (!defaultTab) return setSelectedTab(subnav[0].tab);
+    if (!tab) return setSelectedTab(defaultTab.tab);
+
+    setSelectedTab(tab);
+  }, [tab]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -167,30 +190,26 @@ export default function Notes() {
   return (
     <main className="mx-auto flex h-auto min-h-screen w-full max-w-screen-full-hd flex-col items-start justify-start p-4">
       <section
-        className="mb-4 flex h-fit w-full items-center justify-between gap-2"
+        className="mb-8 flex h-fit w-full items-center justify-between gap-4 border-b border-zinc-200 pb-4 dark:border-zinc-900"
         aria-label="Subnav and actions"
       >
         <div
-          className="flex h-fit w-fit items-center justify-start gap-4"
+          className="flex h-fit w-fit items-center justify-start gap-2"
           aria-label="Subnav"
         >
           {subnav &&
             subnav.map((item: any) => {
-              const { title, href } = item;
-              const active = !!pathname === href;
+              const { title, href, tab } = item;
+              const active = selectedTab === tab;
 
               return (
                 <Link
                   key={title}
                   href={href}
-                  className="relative flex h-fit w-fit items-center justify-center gap-2 rounded-md px-1 py-2 text-zinc-600 dark:text-zinc-400"
+                  className="flex h-fit w-fit items-center justify-center gap-2 rounded-md px-4 py-2 border border-zinc-200 bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit disabled:dark:hover:bg-inherit data-[active=true]:bg-zinc-200 data-[active=true]:text-zinc-600 data-[active=true]:dark:bg-zinc-900 data-[active=true]:dark:text-zinc-400"
+                  data-active={active}
                 >
                   <span className="text-sm">{title}</span>
-
-                  <div
-                    className="absolute inset-x-0 bottom-0 h-px rounded-full bg-zinc-600 opacity-0 transition-all duration-300 data-[active=true]:opacity-100 dark:bg-zinc-400"
-                    data-active={active}
-                  />
                 </Link>
               );
             })}
@@ -200,7 +219,10 @@ export default function Notes() {
           className="hidden h-10 w-fit items-center justify-end gap-2 sm:flex"
           aria-label="Actions"
         >
-          <button className="flex h-full w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900">
+          <button
+            className="flex h-full w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit disabled:dark:hover:bg-inherit"
+            disabled
+          >
             <Icon name="Filter" className="h-4 w-4" />
             <span className="text-sm">Filters</span>
           </button>
@@ -210,45 +232,27 @@ export default function Notes() {
             aria-label="Toggle view"
           >
             <button
-              className="flex h-full w-10 items-center justify-center gap-2 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 data-[active=true]:bg-zinc-200 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 data-[active=true]:dark:bg-zinc-900"
+              className="flex h-full w-10 items-center justify-center gap-2 bg-zinc-50 p-2 text-zinc-600 hover:bg-zinc-50 data-[active=true]:bg-zinc-100 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 data-[active=true]:dark:bg-zinc-900"
               onClick={() => handleToggleView('grid')}
               data-active={selectedView === 'grid'}
+              disabled={view === 'grid'}
             >
               <Icon name="Grid" className="h-4 w-4" />
             </button>
 
             <button
-              className="flex h-full w-10 items-center justify-center gap-2 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 data-[active=true]:bg-zinc-200 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 data-[active=true]:dark:bg-zinc-900"
+              className="flex h-full w-10 items-center justify-center gap-2 bg-zinc-50 p-2 text-zinc-600 hover:bg-zinc-50 data-[active=true]:bg-zinc-100 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 data-[active=true]:dark:bg-zinc-900"
               onClick={() => handleToggleView('list')}
               data-active={selectedView === 'list'}
             >
               <Icon name="List" className="h-4 w-4" />
             </button>
           </div>
-
-          <button
-            className="flex h-full w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900"
-            disabled
-          >
-            <Icon name="Plus" className="h-4 w-4" />
-            <span className="text-sm">New Note</span>
-          </button>
         </div>
       </section>
 
       {!loading && posts && posts.length > 0 ? (
         <>
-          <h1 className="mb-8 flex h-16 w-full items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900">
-            <Link
-              href="/"
-              className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
-            >
-              <span className="sr-only">Home</span>
-              <Icon name="ChevronLeft" className="h-4 w-4" />
-            </Link>
-            <span className="text-xl sm:text-3xl">All notes</span>
-          </h1>
-
           {filters &&
             (filters.author || filters.category) &&
             Object.keys(filters).length > 0 && (
@@ -301,8 +305,10 @@ export default function Notes() {
 
           <ul
             className={`${
-              view === 'grid' ? 'grid gap-x-4 gap-y-8' : 'flex flex-col gap-0'
-            } w-full grid-cols-1 divide-y divide-zinc-200 transition-all duration-500 ease-in-out sm:grid-cols-2 sm:divide-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 dark:divide-zinc-900`}
+              view === 'grid'
+                ? 'grid gap-0 sm:gap-x-4 sm:gap-y-8'
+                : 'flex flex-col max-w-screen-lg mx-auto gap-4'
+            } grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 transition-all duration-300 ease-in-out`}
           >
             {posts.length > 0 ? (
               posts
@@ -325,11 +331,11 @@ export default function Notes() {
                   return (
                     <li
                       key={index}
-                      className={`flex w-full ${
+                      className={`flex w-full border-b ${
                         view === 'grid'
-                          ? 'flex-col pb-0 pt-8 sm:py-0'
-                          : 'pb-12 pt-4'
-                      } items-start justify-start overflow-hidden transition-all duration-500 ease-in-out first-of-type:pt-0`}
+                          ? 'flex-col py-8 sm:py-0 first-of-type:pt-0 sm:border-transparent'
+                          : 'sm:border pb-14 p-4 rounded-md bg-zinc-100 dark:bg-zinc-1000 border-zinc-200 dark:border-zinc-900'
+                      } items-start justify-start overflow-hidden transition-all duration-300 ease-in-out`}
                     >
                       <div
                         className={`relative flex flex-col ${
@@ -353,7 +359,7 @@ export default function Notes() {
                               <Image
                                 src={thumbnail}
                                 alt={title}
-                                className="pointer-events-none aspect-video w-full select-none bg-zinc-100 blur-xl transition-all duration-500 ease-in-out dark:bg-zinc-900"
+                                className="pointer-events-none aspect-video w-full select-none bg-zinc-100 blur-xl transition-all duration-300 ease-in-out dark:bg-zinc-900"
                                 style={{ objectFit: 'cover' }}
                                 width={640}
                                 height={360}
@@ -379,7 +385,7 @@ export default function Notes() {
                           className={`scrollbar-none flex items-center justify-start gap-1.5 ${
                             view === 'grid'
                               ? 'mb-4 w-full overflow-x-auto'
-                              : 'absolute bottom-0 mt-4 translate-y-full flex-wrap pt-4'
+                              : 'absolute bottom-0 mt-8 translate-y-full flex-wrap pt-4'
                           }`}
                           aria-label="Categories"
                         >
@@ -390,7 +396,7 @@ export default function Notes() {
                                   <Link
                                     key={index}
                                     href={`/notes?category=${category}`}
-                                    className="w-fit text-nowrap rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 hover:bg-zinc-200 hover:text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                                    className="w-fit text-nowrap rounded-md bg-zinc-200 px-2 py-1 text-xs font-medium uppercase tracking-tight text-zinc-500 hover:bg-zinc-300 hover:text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
                                   >
                                     {category}
                                   </Link>
@@ -547,14 +553,6 @@ export default function Notes() {
         </>
       ) : (
         <>
-          <div
-            className="pointer-events-none mb-8 flex h-16 w-full animate-pulse select-none items-center justify-start gap-4 border-b border-zinc-200 pb-4 font-medium dark:border-zinc-900"
-            aria-label="Loading notes"
-          >
-            <div className="h-10 min-h-10 w-10 min-w-10 rounded-md bg-zinc-100 dark:bg-zinc-900" />
-            <div className="h-10 min-h-10 w-full max-w-md rounded-md bg-zinc-100 dark:bg-zinc-900" />
-          </div>
-
           <div
             aria-label="Loading filters"
             className="pointer-events-none mb-8 flex h-screen w-full animate-pulse select-none items-start justify-start gap-2 overflow-hidden"

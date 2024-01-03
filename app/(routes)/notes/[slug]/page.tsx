@@ -36,7 +36,7 @@ export default async function NotePage({
         aria-label="Breadcrumb"
       >
         <Link
-          href="/notes"
+          href="/explore"
           className="flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
         >
           <span className="sr-only">Home</span>
@@ -48,7 +48,7 @@ export default async function NotePage({
           aria-label="Breadcrumb"
         >
           <Link
-            href="/notes"
+            href="/explore"
             className="text-sm text-zinc-500 hover:underline dark:text-zinc-400"
             aria-label="All notes"
           >
