@@ -23,6 +23,21 @@ export const Header = () => {
     else setSelectedMenuOpen(!isOpen);
   };
 
+  const handleToggleFullMenu = (state?: boolean) => {
+    if (state) {
+      setOpen(state);
+      setSelectedMenuOpen(state);
+    } else {
+      if (isOpen) {
+        setOpen(false);
+        setSelectedMenuOpen(false);
+      } else {
+        setOpen(true);
+        setSelectedMenuOpen(true);
+      }
+    }
+  };
+
   useEffect(() => {
     setOpen(selectedMenuOpen);
   }, [selectedMenuOpen]);
@@ -31,10 +46,7 @@ export const Header = () => {
     const width = window.innerWidth;
 
     const handleResize = () => {
-      if (selectedMenuOpen && width < 640) {
-        setOpen(false);
-        setSelectedMenuOpen(false);
-      }
+      if (selectedMenuOpen && width < 640) handleToggleFullMenu(false);
     };
 
     if (typeof window === 'undefined') return;
@@ -80,7 +92,7 @@ export const Header = () => {
                       ? 'hover:bg-zinc-200 dark:hover:bg-zinc-950'
                       : 'text-zinc-600 hover:bg-zinc-200 dark:text-zinc-400 dark:hover:bg-zinc-900'
                   }`}
-                  onClick={() => handleToggleMenu(false)}
+                  onClick={() => handleToggleFullMenu(false)}
                 >
                   {title}
                 </Link>
