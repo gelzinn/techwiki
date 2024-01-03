@@ -61,7 +61,7 @@ export const Header = () => {
       className={`sticky top-0 z-10 mx-auto flex items-center justify-center ${
         isOpen ? 'h-screen' : 'h-16 overflow-hidden'
       } border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50`}
-      aria-label="Header"
+      aria-label="Application Header"
       data-open={isOpen}
     >
       <div
