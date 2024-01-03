@@ -12,7 +12,7 @@ import {
 
 import { Icon } from '@/components/icon';
 
-import { formatTimeDifference } from '@/lib/formatters/timeDifference';
+import { formatTimeDifference } from '@/utils/formatters/timeDifference';
 import { subnav } from '@/config/header/subnav';
 
 import { IPost } from '@/@types/post';
