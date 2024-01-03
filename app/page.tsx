@@ -157,8 +157,6 @@ export default function Homepage() {
           )}
         </div>
       </section>
-
-      <section className="mx-auto flex w-full flex-col items-center justify-start px-4 py-8"></section>
     </main>
   );
 }
