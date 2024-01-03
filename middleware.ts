@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from '@/infra/next/server';
 import { redirects as redirectsUrls } from '@/config/redirects';
 import { baseUrl } from '@/config/env';
 
+type TRedirects = {
+  [key: string]: string;
+};
+
 const starts = (request: NextRequest, path: string) =>
   request.nextUrl.pathname.startsWith(path);
 
@@ -11,10 +15,6 @@ const ends = (request: NextRequest, path: string) =>
 
 const equals = (request: NextRequest, path: string) =>
   request.nextUrl.pathname === path;
-
-type TRedirects = {
-  [key: string]: string;
-};
 
 const redirects: TRedirects = redirectsUrls;
 

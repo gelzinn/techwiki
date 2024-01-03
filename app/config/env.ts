@@ -1,10 +1,11 @@
-type TEnv = 'dev' | 'prod';
+type TEnv = 'dev' | 'prod' | 'prev';
 
 const environment: TEnv = (process.env.ENVIRONMENT as TEnv) || 'dev';
 
 const url = {
   dev: 'http://localhost:3000',
   prod: 'https://wiki.gelzin.com',
+  prev: 'https://wiki-prev.gelzin.com',
 };
 
 const baseUrl = url[environment];
