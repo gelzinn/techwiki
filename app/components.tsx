@@ -13,27 +13,17 @@ export const ComponentsLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      {preventComponents.map((prevent) => {
-        const { routes, components } = prevent;
-
-        if (routes.includes(pathname)) {
-          return (
-            <Fragment key={routes.join(',')}>
-              {!components.includes('Header') && <Header />}
-              {children}
-              {!components.includes('Footer') && <Footer />}
-            </Fragment>
-          );
-        }
-
-        return (
-          <Fragment key={routes.join(',')}>
-            <Header />
-            {children}
-            <Footer />
-          </Fragment>
-        );
-      })}
+      {!preventComponents.some((prevent) =>
+        prevent.routes.includes(pathname),
+      ) ? (
+        <>
+          <Header />
+          {children}
+          <Footer />
+        </>
+      ) : (
+        children
+      )}
     </>
   );
 };

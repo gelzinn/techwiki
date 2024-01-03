@@ -1,6 +1,6 @@
 export default function NotFound() {
   return (
-    <>
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <h1 className="text-center text-6xl">404</h1>
 
       <p className="flex items-center justify-center">
@@ -12,6 +12,6 @@ export default function NotFound() {
           Go back to home
         </a>
       </p>
-    </>
+    </main>
   );
 }
