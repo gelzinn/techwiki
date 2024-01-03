@@ -52,7 +52,10 @@ export default function AuthPage() {
                 Everything a tech enthusiast needs. All in one place.
               </p>
 
-              <button className="mt-4 flex w-full items-center justify-center gap-4 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-3 transition-all hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+              <button
+                className="mt-4 flex w-full items-center justify-center gap-4 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-3 transition-all hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+                disabled
+              >
                 <Icon name="GithubIcon" size={20} />
                 <span className="text-zinc-500 dark:text-zinc-400">
                   Sign in with GitHub
