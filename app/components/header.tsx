@@ -51,7 +51,7 @@ export const Header = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [selectedMenuOpen]);
+  }, [selectedMenuOpen, handleToggleFullMenu]);
 
   return (
     <header
