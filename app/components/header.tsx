@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import { Link } from '@/infra/next/app';
 
@@ -13,40 +13,38 @@ import { Icon } from '@/components/icon';
 export const Header = () => {
   const { theme, oppositeTheme, toggleTheme } = useTheme();
 
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedMenuOpen, setSelectedMenuOpen] = useState(false);
 
   const handleToggleTheme = () => toggleTheme();
 
   const handleToggleMenu = (state?: boolean) => {
-    if (state) setSelectedMenuOpen(state);
-    else setSelectedMenuOpen(!isOpen);
+    if (state) handleToggleFullMenu(state);
+    else handleToggleFullMenu();
   };
 
   const handleToggleFullMenu = (state?: boolean) => {
     if (state) {
-      setOpen(state);
+      setIsOpen(state);
       setSelectedMenuOpen(state);
     } else {
       if (isOpen) {
-        setOpen(false);
+        setIsOpen(false);
         setSelectedMenuOpen(false);
       } else {
-        setOpen(true);
+        setIsOpen(true);
         setSelectedMenuOpen(true);
       }
     }
   };
 
-  useEffect(() => {
-    setOpen(selectedMenuOpen);
-  }, [selectedMenuOpen]);
-
-  useEffect(() => {
-    const width = window.innerWidth;
-
+  useLayoutEffect(() => {
     const handleResize = () => {
-      if (selectedMenuOpen && width < 640) handleToggleFullMenu(false);
+      const width = window.innerWidth;
+
+      if (!width) return;
+
+      if (selectedMenuOpen && width >= 640) handleToggleFullMenu(false);
     };
 
     if (typeof window === 'undefined') return;
@@ -61,6 +59,7 @@ export const Header = () => {
         isOpen ? 'h-screen' : 'h-16 overflow-hidden'
       } border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50`}
       aria-label="Header"
+      data-open={isOpen}
     >
       <div
         className="flex h-auto w-full max-w-screen-full-hd items-center justify-between gap-2 p-4"
