@@ -1,6 +1,7 @@
 import { Ubuntu } from 'next/font/google';
+import { Toaster } from '@/infra/sonner';
 
-import { ComponentsLayout as LayoutProvider } from './components';
+import { ComponentsLayout as LayoutProvider } from '@/components';
 
 import { seo } from '@/config/seo';
 import { theme } from '@/config/theme';
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: any) {
           </head>
 
           <body className="relative h-auto min-h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+            <Toaster richColors closeButton />
             <LayoutProvider>{children}</LayoutProvider>
           </body>
         </html>

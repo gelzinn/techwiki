@@ -10,6 +10,8 @@ import {
   usePathname,
 } from '@/infra/next/app';
 
+import { toast } from '@/infra/sonner';
+
 import { Icon } from '@/components/icon';
 
 import { formatTimeDifference } from '@/utils/formatters/timeDifference';
@@ -178,7 +180,7 @@ export default function Notes() {
         setPosts(data);
         setFetchedPosts(data);
       } catch (error) {
-        console.error(error);
+        toast.error('Error fetching posts.');
       } finally {
         setLoading(false);
       }
