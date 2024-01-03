@@ -4,9 +4,9 @@ import {
   defaultWikiUrl as baseUrl,
   repo,
   wikiPagesUrl as wikiUrl,
-} from 'app/config/content';
+} from '@/config/content';
 
-import { notes as notesEnv } from 'app/config/env';
+import { notes as notesEnv } from '@/config/env';
 
 export const getNote = async (s: string) => {
   const slug = s

@@ -1,8 +1,7 @@
 import { NextResponse } from '@/infra/next/server';
 
-import { repo, wikiPagesUrl as wikiUrl } from 'app/config/content';
-
-import { notes as notesEnv } from 'app/config/env';
+import { repo, wikiPagesUrl as wikiUrl } from '@/config/content';
+import { notes as notesEnv } from '@/config/env';
 
 import { getNote } from '@/lib/notes';
 import { IPost } from '@/@types/post';
