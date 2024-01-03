@@ -27,24 +27,9 @@ const tailwindConfig = {
         'skew-scroll': 'skew-scroll 20s ease-in-out infinite',
         'skew-scroll-reverse': 'skew-scroll-reverse 20s ease-in-out infinite',
       },
-      keyframes: {
-        'skew-scroll': {
-          '0%, 100%': {
-            transform: 'translateZ(0) translateY(-100%) skewX(5deg) rotateX(-5deg) rotateZ(-5deg)',
-          },
-          '50%': {
-            transform:
-              'translateZ(0) translateY(-350%) skewX(5deg) rotateX(-5deg) rotateZ(-5deg)',
-          },
-        },
-        'skew-scroll-reverse': {
-          '0%, 100%': {
-            transform: 'translateZ(0) translateY(100%)',
-          },
-          '50%': {
-            transform:
-              'translateZ(0) translateY(350%)',
-          },
+      colors: {
+        'zinc': {
+          1000: 'rgb(7 7 9)',
         },
       },
     },
