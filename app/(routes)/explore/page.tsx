@@ -206,7 +206,7 @@ export default function Notes() {
                 <Link
                   key={title}
                   href={href}
-                  className="flex h-fit w-fit items-center justify-center gap-2 rounded-md px-4 py-2 border border-zinc-200 bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit disabled:dark:hover:bg-inherit data-[active=true]:bg-zinc-200 data-[active=true]:text-zinc-600 data-[active=true]:dark:bg-zinc-900 data-[active=true]:dark:text-zinc-400"
+                  className="flex h-fit w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-2 text-zinc-600 hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit data-[active=true]:bg-zinc-200 data-[active=true]:text-zinc-600 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:dark:hover:bg-inherit data-[active=true]:dark:bg-zinc-900 data-[active=true]:dark:text-zinc-400"
                   data-active={active}
                 >
                   <span className="text-sm">{title}</span>
@@ -220,7 +220,7 @@ export default function Notes() {
           aria-label="Actions"
         >
           <button
-            className="flex h-full w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit disabled:dark:hover:bg-inherit"
+            className="flex h-full w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 p-2 text-zinc-600 hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:dark:hover:bg-inherit"
             disabled
           >
             <Icon name="Filter" className="h-4 w-4" />
@@ -307,8 +307,8 @@ export default function Notes() {
             className={`${
               view === 'grid'
                 ? 'grid gap-0 sm:gap-x-4 sm:gap-y-8'
-                : 'flex flex-col max-w-screen-lg mx-auto gap-4'
-            } grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 transition-all duration-300 ease-in-out`}
+                : 'mx-auto flex max-w-screen-lg flex-col gap-4'
+            } grid-cols-1 transition-all duration-300 ease-in-out sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
           >
             {posts.length > 0 ? (
               posts
@@ -333,8 +333,8 @@ export default function Notes() {
                       key={index}
                       className={`flex w-full border-b ${
                         view === 'grid'
-                          ? 'flex-col py-8 sm:py-0 first-of-type:pt-0 sm:border-transparent'
-                          : 'sm:border pb-14 p-4 rounded-md bg-zinc-100 dark:bg-zinc-1000 border-zinc-200 dark:border-zinc-900'
+                          ? 'flex-col py-8 first-of-type:pt-0 sm:border-transparent sm:py-0'
+                          : 'rounded-md border-zinc-200 bg-zinc-100 p-4 pb-14 sm:border dark:border-zinc-900 dark:bg-zinc-1000'
                       } items-start justify-start overflow-hidden transition-all duration-300 ease-in-out`}
                     >
                       <div

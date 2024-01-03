@@ -170,17 +170,23 @@ const MasonryLayout = ({ notes }: any) => (
               className="flex h-fit cursor-pointer items-start rounded-md border border-zinc-200 bg-zinc-100 p-4 shadow-zinc-50 transition-all hover:-translate-x-1 hover:translate-y-1 hover:scale-[1.025] hover:shadow-xl dark:border-zinc-900 dark:bg-zinc-950 dark:shadow-zinc-950"
             >
               <div className="flex flex-col items-start justify-start gap-4">
-                <picture className="pointer-events-none aspect-video h-full w-full select-none rounded-md bg-zinc-200 dark:bg-zinc-900">
+                <picture className="pointer-events-none aspect-video h-full w-full select-none overflow-hidden rounded-md bg-zinc-200 dark:bg-zinc-900">
                   <Image
                     src={thumbnail}
                     alt={title}
-                    className="pointer-events-none aspect-video h-full w-full select-none rounded-md bg-zinc-200 dark:bg-zinc-900"
+                    className="pointer-events-none aspect-video h-full w-full select-none rounded-md bg-zinc-200 blur-xl transition-all duration-300 ease-in-out dark:bg-zinc-900"
                     style={{ objectFit: 'cover' }}
                     width={640}
                     height={360}
                     quality={50}
-                    loading="lazy"
-                    loader={({ src }) => src}
+                    onLoadStart={(e) => {
+                      const image = e.target as HTMLImageElement;
+                      image.classList.add('blur-xl');
+                    }}
+                    onLoad={(e) => {
+                      const image = e.target as HTMLImageElement;
+                      image.classList.remove('blur-xl');
+                    }}
                     about={`Thumbnail of ${title}`}
                   />
                 </picture>
