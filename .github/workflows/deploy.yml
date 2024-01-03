@@ -49,7 +49,7 @@ jobs:
         run: pnpm audit
 
       - name: Deploy to Vercel
-        run: echo Y | pnpm exec vercel . --prod --token $VERCEL_TOKEN --yes
+        run: echo Y | pnpm exec vercel --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --yes --prod
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         if: success()
