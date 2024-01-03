@@ -17,9 +17,9 @@ export default function Homepage() {
   };
 
   return (
-    <main className="mx-auto flex flex-col h-auto w-full max-w-screen-full-hd min-h-screen">
-      <section className="flex flex-1 flex-col items-center justify-start w-full max-w-5xl h-full mx-auto px-4 py-8">
-        <div className="flex flex-1 w-full flex-col items-center justify-start gap-4 text-zinc-950 dark:text-zinc-50">
+    <main className="mx-auto flex h-auto min-h-screen w-full max-w-screen-full-hd flex-col">
+      <section className="mx-auto flex h-full w-full max-w-5xl flex-1 flex-col items-center justify-start px-4 py-8">
+        <div className="flex w-full flex-1 flex-col items-center justify-start gap-4 text-zinc-950 dark:text-zinc-50">
           <span
             className="flex w-fit items-center justify-center gap-4 rounded-md border border-emerald-500 bg-emerald-100 px-4 py-2 text-center text-sm text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/25 dark:text-zinc-50"
             role="alert"
@@ -37,7 +37,7 @@ export default function Homepage() {
           </span>
 
           <div
-            className="my-8 flex flex-col items-center justify-center gap-1 mb-auto w-full"
+            className="my-8 mb-auto flex w-full flex-col items-center justify-center gap-1"
             style={
               {
                 textWrap: 'wrap',
@@ -50,9 +50,9 @@ export default function Homepage() {
               The open source encyclopedia for all tech-related topics.
             </span>
 
-            <div className="flex flex-col items-center justify-center gap-2 mt-8 w-full">
+            <div className="mt-8 flex w-full flex-col items-center justify-center gap-2">
               <label
-                className="h-12 w-full min-w-32 max-w-3xl items-center justify-start overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-400 flex dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-600"
+                className="flex h-12 w-full min-w-32 max-w-3xl items-center justify-start overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-400 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-600"
                 htmlFor="search"
               >
                 <div
@@ -109,13 +109,13 @@ export default function Homepage() {
 
               <a
                 href="/explore/random"
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-2 w-fit min-h-10 px-4 py-2 rounded-md border border-transparent text-sm text-zinc-500 hover:bg-zinc-100 dark:text-zinc-50 dark:hover:bg-zinc-900 mt-4"
+                className="mt-4 flex min-h-10 w-fit flex-col items-center justify-center gap-4 rounded-md border border-transparent px-4 py-2 text-sm text-zinc-500 hover:bg-zinc-100 sm:flex-row sm:gap-2 dark:text-zinc-50 dark:hover:bg-zinc-900"
               >
                 <Icon
                   name="Dices"
                   className="h-4 w-4 text-zinc-500 dark:text-zinc-400"
                 />
-                <span className="text-xs sm:text-sm text-center sm:text-inherit">
+                <span className="text-center text-xs sm:text-sm sm:text-inherit">
                   Feeling lucky? Click here for a random article!
                 </span>
               </a>
@@ -158,7 +158,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center justify-start w-full mx-auto px-4 py-8"></section>
+      <section className="mx-auto flex w-full flex-col items-center justify-start px-4 py-8"></section>
     </main>
   );
 }

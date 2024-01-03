@@ -15,14 +15,14 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 mx-auto flex items-center justify-center overflow-hidden border-b border-zinc-200 bg-zinc-100 text-black dark:border-zinc-900 dark:bg-black dark:text-zinc-50">
-      <nav className="relative flex h-20 w-full max-w-screen-full-hd items-center justify-between p-4 gap-2">
-        <TechWikiLogo className="text-xl pr-2" isLink />
+      <nav className="relative flex h-20 w-full max-w-screen-full-hd items-center justify-between gap-2 p-4">
+        <TechWikiLogo className="pr-2 text-xl" isLink />
 
-        <div className="flex items-center justify-center gap-2 h-10 w-auto">
+        <div className="flex h-10 w-auto items-center justify-center gap-2">
           <button
             type="button"
             title={`Toggle to ${oppositeTheme} mode`}
-            className="hidden sm:flex h-10 w-10 aspect-square items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+            className="hidden aspect-square h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 p-2 hover:bg-zinc-200 sm:flex dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900"
             onClick={handleToggleTheme}
           >
             {theme === 'dark' ? (
@@ -34,14 +34,14 @@ export const Header = () => {
 
           <button
             type="button"
-            className="flex h-10 w-auto items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 py-2 px-4 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:hover:bg-zinc-900 text-sm text-zinc-600 dark:text-zinc-400"
+            className="flex h-10 w-auto items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm text-zinc-600 hover:bg-zinc-200 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900"
           >
             Login
           </button>
 
           <button
             type="button"
-            className="flex h-10 w-auto items-center justify-center rounded-md py-2 px-6 border border-rose-400 bg-rose-500 text-sm text-zinc-50 text-nowrap"
+            className="flex h-10 w-auto items-center justify-center text-nowrap rounded-md border border-rose-400 bg-rose-500 px-6 py-2 text-sm text-zinc-50"
           >
             Sign up
           </button>
