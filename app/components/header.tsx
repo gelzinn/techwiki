@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 
 import { Link } from '@/infra/next/app';
 
@@ -23,20 +23,23 @@ export const Header = () => {
     else handleToggleFullMenu();
   };
 
-  const handleToggleFullMenu = (state?: boolean) => {
-    if (state) {
-      setIsOpen(state);
-      setSelectedMenuOpen(state);
-    } else {
-      if (isOpen) {
-        setIsOpen(false);
-        setSelectedMenuOpen(false);
+  const handleToggleFullMenu = useCallback(
+    (state?: boolean) => {
+      if (state) {
+        setIsOpen(state);
+        setSelectedMenuOpen(state);
       } else {
-        setIsOpen(true);
-        setSelectedMenuOpen(true);
+        if (isOpen) {
+          setIsOpen(false);
+          setSelectedMenuOpen(false);
+        } else {
+          setIsOpen(true);
+          setSelectedMenuOpen(true);
+        }
       }
-    }
-  };
+    },
+    [setIsOpen, setSelectedMenuOpen],
+  );
 
   useLayoutEffect(() => {
     const handleResize = () => {
