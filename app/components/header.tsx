@@ -20,7 +20,7 @@ export const Header = () => {
 
   const handleToggleMenu = (state?: boolean) => {
     if (state) handleToggleFullMenu(state);
-    else handleToggleFullMenu();
+    else handleToggleFullMenu(!isOpen);
   };
 
   const handleToggleFullMenu = useCallback(
@@ -47,14 +47,17 @@ export const Header = () => {
 
       if (!width) return;
 
-      if (selectedMenuOpen && width >= 640) handleToggleFullMenu(false);
+      if (selectedMenuOpen && width >= 640) {
+        setIsOpen(false);
+        setSelectedMenuOpen(false);
+      }
     };
 
     if (typeof window === 'undefined') return;
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [selectedMenuOpen, handleToggleFullMenu]);
+  }, [selectedMenuOpen, setIsOpen, setSelectedMenuOpen]);
 
   return (
     <header
