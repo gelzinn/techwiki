@@ -109,14 +109,14 @@ export default function Homepage() {
 
               <a
                 href="/explore/random"
-                className="mt-4 flex min-h-10 w-fit flex-col items-center justify-center gap-4 rounded-md border border-transparent px-4 py-2 text-sm text-zinc-500 hover:bg-zinc-100 sm:flex-row sm:gap-2 dark:text-zinc-50 dark:hover:bg-zinc-900"
+                className="relative mt-4 flex min-h-10 w-full flex-col items-start justify-center gap-2 rounded-md border border-zinc-200 p-4 text-center text-sm text-zinc-500 hover:bg-zinc-100 sm:w-fit sm:flex-row sm:items-center sm:border-0 sm:px-4 sm:py-2 sm:text-inherit dark:border-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-900"
               >
                 <Icon
                   name="Dices"
-                  className="h-4 w-4 text-zinc-500 dark:text-zinc-400"
+                  className="h-6 w-6 text-zinc-950 sm:h-4 sm:w-4 sm:text-zinc-500 dark:text-zinc-50 sm:dark:text-zinc-400"
                 />
-                <span className="text-center text-xs sm:text-sm sm:text-inherit">
-                  Feeling lucky? Click here for a random article!
+                <span className="text-left text-sm max-sm:text-zinc-500 sm:text-inherit max-sm:dark:text-zinc-400">
+                  Want to explore? Click here to get a random article!
                 </span>
               </a>
             </div>
