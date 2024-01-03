@@ -52,4 +52,5 @@ jobs:
         run: echo Y | pnpm exec vercel --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --yes --prod
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         if: success()
