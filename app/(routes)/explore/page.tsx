@@ -208,7 +208,7 @@ export default function Notes() {
                 <Link
                   key={title}
                   href={href}
-                  className={`flex h-fit w-fit items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-2 text-zinc-600 hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit data-[active=true]:bg-zinc-200 data-[active=true]:text-zinc-600 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:dark:hover:bg-inherit data-[active=true]:dark:bg-zinc-900 data-[active=true]:dark:text-zinc-400 select-none ${
+                  className={`flex h-fit w-fit select-none items-center justify-center gap-2 rounded-md border border-zinc-200 bg-zinc-100 px-4 py-2 text-zinc-600 hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-inherit data-[active=true]:bg-zinc-200 data-[active=true]:text-zinc-600 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 disabled:dark:hover:bg-inherit data-[active=true]:dark:bg-zinc-900 data-[active=true]:dark:text-zinc-400 ${
                     active ? 'pointer-events-none' : 'pointer-events-auto'
                   }`}
                   data-active={active}
