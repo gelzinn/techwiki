@@ -123,7 +123,7 @@ export default function Homepage() {
           </div>
 
           {cards && cards.length > 0 && (
-            <div className="grid w-full grid-cols-1 gap-4 sm:py-8 md:grid-cols-2">
+            <div className="mb-4 grid w-full grid-cols-1 gap-4 sm:py-8 md:grid-cols-2">
               {cards.map((card, index) => {
                 const { title, description, href } = card;
 
