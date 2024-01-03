@@ -8,7 +8,7 @@ export const cards: TCard[] = [
   {
     title: 'All Notes',
     description: 'Browse all TechWiki notes.',
-    href: '/notes',
+    href: '/explore',
   },
   {
     title: 'All Topics',
