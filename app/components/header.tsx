@@ -74,24 +74,28 @@ export const Header = () => {
           <nav
             className={`${
               isOpen
-                ? 'z-50 h-screen w-full flex-col bg-zinc-100 dark:bg-zinc-900'
+                ? 'z-50 h-screen w-full flex-col space-y-4 bg-zinc-100 dark:bg-zinc-900'
                 : 'pointer-events-none select-none opacity-0 sm:pointer-events-auto sm:select-auto sm:opacity-100'
             } absolute left-0 top-0 flex h-auto w-auto items-center justify-center gap-2 sm:relative sm:bg-transparent`}
             aria-label="Main navigation"
           >
             {nav.map((item) => {
-              const { title, key, href } = item;
+              const { title, key, href, mobile } = item;
+
+              if (!isOpen && mobile) return null;
 
               return (
                 <Link
                   href={href}
                   key={key}
-                  className={`flex h-10 w-auto items-center justify-center rounded-md px-4 py-2 text-sm ${
+                  className={`flex h-10 w-auto items-center justify-center rounded-md px-4 py-2 ${
                     isOpen
-                      ? 'hover:bg-zinc-200 dark:hover:bg-zinc-950'
-                      : 'text-zinc-600 hover:bg-zinc-200 dark:text-zinc-400 dark:hover:bg-zinc-900'
+                      ? 'text-lg hover:bg-zinc-200 dark:hover:bg-zinc-950'
+                      : 'text-sm text-zinc-600 hover:bg-zinc-200 dark:text-zinc-400 dark:hover:bg-zinc-900'
                   }`}
-                  onClick={() => handleToggleFullMenu(false)}
+                  onClick={() => {
+                    if (isOpen) handleToggleMenu();
+                  }}
                 >
                   {title}
                 </Link>

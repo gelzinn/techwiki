@@ -1,4 +1,17 @@
-export const nav = [
+type TNav = {
+  title: string;
+  href: string;
+  key: string;
+  mobile?: boolean;
+};
+
+export const nav: TNav[] = [
+  {
+    title: 'Home',
+    href: '/',
+    key: 'home',
+    mobile: true,
+  },
   {
     title: 'Explore',
     href: '/explore',
