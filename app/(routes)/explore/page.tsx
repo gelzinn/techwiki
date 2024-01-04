@@ -26,8 +26,6 @@ type TabType = (typeof subnav)[number]['tab'];
 
 export default function Notes() {
   const router = useRouter();
-  const pathname = usePathname();
-
   const search = useSearchParams();
 
   const tab = search.get('tab') as TabType;
@@ -93,7 +91,9 @@ export default function Notes() {
     const author = search.get('author') || '';
     const category = search.get('category') || '';
 
-    if (!author && !category) return setPosts(fetchedPosts);
+    const query = search.get('q') || '';
+
+    if (!author && !category && !query) return setPosts(fetchedPosts);
   }, [search, fetchedPosts, filters]);
 
   useEffect(() => {
@@ -102,7 +102,9 @@ export default function Notes() {
     const author = search.get('author') || '';
     const category = search.get('category') || '';
 
-    if (!author && !category) return setPosts(fetchedPosts);
+    const query = search.get('q') || '';
+
+    if (!author && !category && !query) return setPosts(fetchedPosts);
 
     setFilters((prevFilters: any) => ({
       ...prevFilters,
@@ -114,6 +116,21 @@ export default function Notes() {
     const categories = category.split(',') || [];
 
     const filteredPosts = fetchedPosts.filter((post: IPost) => {
+      if (query) {
+        const title = post.title.toLowerCase();
+        const description = post.description.toLowerCase();
+
+        const queryLower = query.toLowerCase().split(' ');
+
+        if (
+          queryLower.some((q: string) => title.includes(q)) ||
+          queryLower.some((q: string) => description.includes(q)) ||
+          queryLower.some((q: string) => authors.includes(q)) ||
+          queryLower.some((q: string) => categories.includes(q))
+        )
+          return true;
+      }
+
       if (authors && authors.length > 0) {
         const postAuthors = post.authors || [];
 
@@ -180,7 +197,7 @@ export default function Notes() {
         setPosts(data);
         setFetchedPosts(data);
       } catch (error) {
-        toast.error('Error fetching posts.');
+        toast.error('Something went wrong, please try again later.');
       } finally {
         setLoading(false);
       }

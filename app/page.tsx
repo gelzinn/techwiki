@@ -1,19 +1,39 @@
 'use client';
 
 import { CSSProperties, useState } from 'react';
+import { useRouter } from '@/infra/next/app';
 
 import { TechWikiLogo } from '@/components/logo';
 import { Icon } from '@/components/icon';
 
 import { cards } from '@/config/home/cards';
-import { Loading } from './components/loading';
+import { Loading } from '@/components/loading';
+import { toast } from '@/infra/sonner';
 
 export default function Homepage() {
+  const router = useRouter();
+
   const [search, setSearch] = useState('');
   const [searching, setSearching] = useState(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      setSearching(true);
+
+      if (!search) return;
+
+      router.push(`/explore?q=${search}`);
+    } catch (error) {
+      toast.error('Something went wrong, please try again later.');
+    } finally {
+      setSearching(false);
+    }
   };
 
   return (
@@ -50,18 +70,20 @@ export default function Homepage() {
               The open source encyclopedia for all tech-related topics.
             </span>
 
-            <div className="mt-8 flex w-full flex-col items-center justify-center gap-2">
+            <form
+              className="mt-8 flex w-full flex-col items-center justify-center gap-2"
+              onSubmit={handleSubmit}
+            >
               <label
                 className="flex h-12 w-full min-w-32 max-w-3xl items-center justify-start overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-400 dark:border-zinc-900 dark:bg-zinc-950 dark:text-zinc-600"
                 htmlFor="search"
               >
-                <div
-                  className={`ml-1 flex h-10 w-10 items-center justify-center ${
-                    searching ? '-ml-4 h-10 w-0 opacity-0' : 'opacity-100'
-                  } transition-all duration-300`}
+                <button
+                  type="submit"
+                  className="ml-1 flex h-10 w-10 items-center justify-center transition-all duration-100"
                 >
-                  <Icon name="Search" className={`h-4 w-4`} strokeWidth={1.5} />
-                </div>
+                  <Icon name="Search" className="h-4 w-4" strokeWidth={1.5} />
+                </button>
 
                 <input
                   type="text"
@@ -89,7 +111,7 @@ export default function Homepage() {
                   />
                 </div>
 
-                <button
+                {/* <button
                   className={` mr-1 flex h-10 w-10 items-center justify-center ${
                     search && !searching
                       ? 'h-10 w-10 opacity-100'
@@ -104,7 +126,7 @@ export default function Homepage() {
                     }`}
                     strokeWidth={1.5}
                   />
-                </button>
+                </button> */}
               </label>
 
               <a
@@ -119,7 +141,7 @@ export default function Homepage() {
                   Want to explore? Click here to get a random article!
                 </span>
               </a>
-            </div>
+            </form>
           </div>
 
           {cards && cards.length > 0 && (

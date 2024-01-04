@@ -12,10 +12,13 @@ export async function GET(request: Request) {
   const params = {
     author: searchParams.get('author') || null,
     category: searchParams.get('category') || null,
+    query: searchParams.get('query') || null,
   };
 
   const authors = params.author ? params.author.split(',') : null;
   const categories = params.category ? params.category.split(',') : null;
+
+  const query = params.query ? params.query.toLowerCase() : null;
 
   try {
     const res = await fetch(wikiUrl, {
@@ -59,11 +62,24 @@ export async function GET(request: Request) {
     let sortedNotes = [];
 
     if (!authors && !categories) {
-      sortedNotes = notes.sort((a: any, b: any) => {
-        const aDate = new Date(a.date);
-        const bDate = new Date(b.date);
-        return bDate.getTime() - aDate.getTime();
-      });
+      if (query) {
+        const queryNotes = notes.filter(
+          (note: IPost) =>
+            (note.title.toLowerCase().includes(query) ||
+              note.description.toLowerCase().includes(query) ||
+              note.slug.toLowerCase().includes(query) ||
+              note.authors.map((a) => a.toLowerCase()).includes(query) ||
+              note.categories.map((c) => c.toLowerCase()).includes(query)) ??
+            null,
+        );
+        sortedNotes.push(...queryNotes);
+      } else {
+        sortedNotes = notes.sort((a: any, b: any) => {
+          const aDate = new Date(a.date);
+          const bDate = new Date(b.date);
+          return bDate.getTime() - aDate.getTime();
+        });
+      }
     } else {
       if (authors) {
         authors.forEach((author) => {

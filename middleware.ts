@@ -23,6 +23,10 @@ const redirects: TRedirects = redirectsUrls;
  */
 
 export async function middleware(request: NextRequest) {
+  /**
+   * Redirect user to the homepage when accessing the API base route.
+   */
+
   if (equals(request, '/api') || equals(request, '/notes'))
     return NextResponse.redirect(baseUrl);
 
