@@ -27,9 +27,28 @@ export async function middleware(request: NextRequest) {
    * Redirect user to the homepage when accessing the API base route.
    */
 
-  if (equals(request, '/api') || equals(request, '/notes'))
+  if (
+    equals(request, '/notes') ||
+    equals(request, '/api') ||
+    equals(request, '/api/emoji')
+  )
     return NextResponse.redirect(baseUrl);
 
+  /**
+   * Some API routes.
+   */
+
+  if (starts(request, '/api/emoji')) {
+    const url = request.url;
+    const emoji = url.split('/api/emoji/')[1];
+
+    const svg = await fetch(`https://fmj.asrvd.me/${emoji}`);
+    const svgText = await svg.text();
+
+    return NextResponse.json({ svg: svgText });
+  }
+
+  // await fetch(`https://fmj.asrvd.me/${emoji}`);
   /**
    * Shortcuts for the most common redirects.
    */
