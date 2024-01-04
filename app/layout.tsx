@@ -42,7 +42,7 @@ export default function RootLayout({ children }: any) {
               name="google-adsense-account"
               content="ca-pub-8214931196684102"
             />
-            <link rel="icon" href="https://wiki.gelzin.com/api/emoji/⚙" />
+            <link rel="icon" href="https://wiki.gelzin.com/api/emoji/🌐" />
           </head>
 
           <body className="relative h-auto min-h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
