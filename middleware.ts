@@ -40,15 +40,28 @@ export async function middleware(request: NextRequest) {
 
   if (starts(request, '/api/emoji')) {
     const url = request.url;
-    const emoji = url.split('/api/emoji/')[1];
+    const params = url.split('/api/emoji/').pop();
+
+    if (!params)
+      return NextResponse.json(
+        { error: 'Emoji not found' },
+        {
+          status: 404,
+        },
+      );
+
+    const emoji = params.split('/')[0];
 
     const svg = await fetch(`https://fmj.asrvd.me/${emoji}`);
     const svgText = await svg.text();
 
-    return NextResponse.json({ svg: svgText });
+    return new Response(svgText, {
+      headers: {
+        'Content-Type': 'image/svg+xml',
+      },
+    });
   }
 
-  // await fetch(`https://fmj.asrvd.me/${emoji}`);
   /**
    * Shortcuts for the most common redirects.
    */

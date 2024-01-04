@@ -42,5 +42,9 @@ export async function GET(
   const res = await fetch(`https://flagcdn.com/${code}.svg`);
   const svg = await res.text();
 
-  return NextResponse.json({ data: svg }, { status: 200 });
+  return new Response(svg, {
+    headers: {
+      'Content-Type': 'image/svg+xml',
+    },
+  });
 }
