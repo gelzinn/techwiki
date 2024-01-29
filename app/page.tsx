@@ -48,8 +48,7 @@ export default function Homepage() {
               ✦
             </span>
             <p>
-              <strong className="font-medium">Announcement:</strong> TechWiki is
-              now open source!
+              TechWiki is under development!
             </p>
             <span className="pointer-events-none select-none text-emerald-500">
               ✦
